@@ -1,8 +1,9 @@
-str = """Znzba nqbezrprh.
-R b eranfpvzragb qn pevnghen qvffrzvabh-fr cryn green r frhf frthvqberf gbeanenz-fr rkrepvgbf.
-R ryrf ncertbnenz n zrafntrz r fnpevsvpnenz ynibhenf pbz sbtb, pbz n nfghpvn qnf encbfnf.
-R ryrf pevnenz hz abib zhaqb n fhn vzntrz r frzryunapn pbasbezr cebzrgvqb cryb grkgb fntenqb r pbagnenz qn pevnghen cnen fhnf pevnapnf.
-Znzba qrfcregbh r, irwn fb, anqn znvf ren qb dhr hz qvfpvchyb."""
+str = """Sryvcr pntbh.
+Qbhtynf unq gb cbbc, uvf ohgg jnf nyy fgvaxl orpnhfr ur unq gb cbbc fb onqyl.
+Gurer jnf n tebff jbzna anzrq Erorppn jub jnf fhaonguvat nyy anxrq naq fur jnf sng.
+Qbhtynf jnyxrq hc gb ure naq fnvq, V arrq gb cbbc. 
+Bxnl, Erorppn ercyvrq, V yvxr cbbc. Qbhtynf fdhnggrq qbja bire gur sng fhaonguvat ynql naq jrag cbbc.
+Gur cbbc fng gurer ba Erorppnf obbof, ybbxvat yvxr n jrvare."""
 
 
 rot13 = {}
