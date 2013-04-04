@@ -1,0 +1,16 @@
+{% extends "politicians/base.html" %}
+
+{% block content %}
+<h1 id="heading_text">Meu Político - Políticos</h1>
+
+{% if politicians_list %}
+    <ul>
+    {% for politician in politicians_list %}
+        <li><a href="{% url 'politician_profile' politician.id %}">{{ politician.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nenhum político cadastrado.</p>
+{% endif %}
+
+{% endblock %}

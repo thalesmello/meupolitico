@@ -1,0 +1,19 @@
+{% extends "politicians/base.html" %}
+
+{% block content %}
+<h1 id="heading_text">Meu Político - Perfil do Político</h1>
+<h2>{{ politician.name }}</h2>
+<p>{{ politician.party.acronym }}</p>
+
+<h3>Notícias</h3>
+{% if recent_news %}
+    <ul>
+    {% for news in recent_news %}
+        <li><a href="{{ news.link }}">{{ news.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nenhuma notícia recente.</p>
+{% endif %}
+
+{% endblock %}

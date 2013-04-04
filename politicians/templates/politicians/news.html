@@ -1,0 +1,19 @@
+{% extends "politicians/base.html" %}
+
+{% block content %}
+<h1 id="heading_text">Meu Político - {{ news_heading }}</h1>
+
+{% if news_list %}
+    <ul>
+    {% for news in news_list %}
+        <li>
+        <a href="{{ news.link}}">{{ news.title }}</a> - 
+            <a href="{% url 'politician_profile' news.politician.id %}">{{ news.politician.name }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nenhuma notícia cadastrada.</p>
+{% endif %}
+
+{% endblock %}

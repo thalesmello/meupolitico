@@ -15,6 +15,7 @@ class Politician(models.Model):
 class News(models.Model):
     politician = models.ForeignKey(Politician)
     title = models.CharField(max_length=200)
-    link = models.CharField(max_length=200)
+    link = models.URLField(max_length=200)
+    pub_date = models.DateTimeField('date published')
     def __unicode__(self):
         return self.title

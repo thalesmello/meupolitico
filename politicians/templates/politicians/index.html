@@ -1,6 +1,13 @@
-<header>
-<title id='header_title'>Meu Político</title>
-</header>
-<body>
-<h1 id='heading_text'>Meu Político</h1>
-</body>
+{% extends "politicians/base.html" %}
+
+{% block title %}Meu Político{% endblock %}
+
+{% block content %}
+<h1 id="heading_text">Meu Político</h1>
+
+<ul>
+<li><a href="{% url 'politicians' %}">Lista de Políticos</a></li>
+<li><a href="{% url 'news' %}">Lista de Notícias</a></li>
+</ul>
+
+{% endblock %}
