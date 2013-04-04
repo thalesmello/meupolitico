@@ -14,7 +14,7 @@ class Politician(models.Model):
 
 class News(models.Model):
     politician = models.ForeignKey(Politician)
-    name = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     link = models.CharField(max_length=200)
     def __unicode__(self):
-        return self.name
+        return self.title
