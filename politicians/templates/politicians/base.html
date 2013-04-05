@@ -1,7 +1,10 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" type="text/css" href="{% static 'politicians/bootstrap.min.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'politicians/style.css' %}" />
     <title id="header_title">{% block title %}Meu Político{% endblock %}</title>
 </head>
 
