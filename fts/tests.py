@@ -42,11 +42,7 @@ class PoliticiansTest(LiveServerTestCase):
         # The user sees if he can reach the politicians list page
         element = self.browser.find_element_by_link_text(u'Lista de Políticos')
         element.click()
-
-        # The user sees if the page contains the a heading with certain text
-        element = self.browser.find_element_by_id('heading_text')
-        self.assertIn(u'Meu Político', element.text)
-        self.assertIn(u'Políticos', element.text)
+        self.assertEquals(self.live_server_url + '/politicians/', self.browser.current_url)
 
     def test_can_access_a_politicians_list_page(self):
         # The user opens his web browser, and goes to the politicians page
@@ -73,10 +69,7 @@ class PoliticiansTest(LiveServerTestCase):
         politician = Politician.objects.all()[0]
         element = self.browser.find_element_by_link_text(politician.name)
         element.click()
-
-        # The user sees if the page contains the a heading with certain text
-        body = self.browser.find_element_by_tag_name('body')
-        self.assertIn(politician.name, body.text)
+        self.assertEquals(self.live_server_url + '/politicians/' + str(politician.id) + '/', self.browser.current_url)
 
     def test_can_access_a_politician_profile(self):
         politician = Politician.objects.all()[0]

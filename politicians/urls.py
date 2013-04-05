@@ -15,4 +15,8 @@ urlpatterns = patterns('',
     url(r'^news/$', views.news, name='news'),
     # ex: /news/all/
     url(r'^news/all/$', views.all_news, name='all_news'),
+    # ex: /search/
+    url(r'^search/$', views.search, name='search'),
+    # ex: /search_results/
+    url(r'^search_results/$', views.search_results, name='search_results'),
 )

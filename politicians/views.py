@@ -26,3 +26,12 @@ def all_news(request):
     news_list = News.objects.all().order_by('-pub_date')
     context = {'news_heading': 'Notícias', 'news_list': news_list}
     return render(request, 'politicians/news.html', context)
+
+def search(request):
+    return render(request, 'politicians/search.html')
+
+def search_results(request):
+    name = request.POST['name']
+    politicians_list = Politician.objects.filter(name__contains=name)
+    context = {'politicians_list': politicians_list}
+    return render(request, 'politicians/politicians.html', context)
