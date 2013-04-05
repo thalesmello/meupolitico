@@ -9,6 +9,7 @@
         <li>
         <a href="{{ news.link}}">{{ news.title }}</a> - 
             <a href="{% url 'politician_profile' news.politician.id %}">{{ news.politician.name }}</a>
+             - {{news.pub_date}}
         </li>
     {% endfor %}
     </ul>
