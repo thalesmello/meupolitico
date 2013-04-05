@@ -1,0 +1,122 @@
+[
+{
+  "pk": 1, 
+  "model": "politicians.party", 
+  "fields": {
+    "acronym": "PT", 
+    "name": "Partido dos Trabalhadores"
+  }
+},
+{
+  "pk": 2, 
+  "model": "politicians.party", 
+  "fields": {
+    "acronym": "PSDB", 
+    "name": "Partido da Social Democracia Brasileira"
+  }
+},
+{
+  "pk": 1, 
+  "model": "politicians.politician", 
+  "fields": {
+    "party": 1, 
+    "name": "Dilma Rousseff"
+  }
+},
+{
+  "pk": 2, 
+  "model": "politicians.politician", 
+  "fields": {
+    "party": 2, 
+    "name": "Jos\u00e9 Serra"
+  }
+},
+{
+  "pk": 3, 
+  "model": "politicians.politician", 
+  "fields": {
+    "party": 2, 
+    "name": "A\u00e9cio Neves"
+  }
+},
+{
+  "pk": 1, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-04-03T10:10:00Z", 
+    "link": "http://g1.globo.com/economia/agronegocios/noticia/2013/04/governo-anuncia-recursos-para-municipios-que-sofrem-com-seca.html", 
+    "politician": 1, 
+    "title": "Governo anuncia recursos para munic\u00edpios que sofrem com a seca"
+  }
+},
+{
+  "pk": 2, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-04-03T15:24:00Z", 
+    "link": "http://g1.globo.com/politica/noticia/2013/04/dilma-vai-sao-paulo-para-compromissos-privados.html", 
+    "politician": 1, 
+    "title": "Dilma vai a S\u00e3o Paulo para compromissos privados "
+  }
+},
+{
+  "pk": 3, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-04-01T18:08:00Z", 
+    "link": "http://www.estadao.com.br/noticias/nacional,serra-se-nega-a-comentar-candidatura-de-aecio-a-presidencia-do-psdb,1015655,0.htm", 
+    "politician": 2, 
+    "title": "Serra se nega a comentar candidatura de A\u00e9cio \u00e0 presid\u00eancia do PSDB"
+  }
+},
+{
+  "pk": 4, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-03-30T12:33:00Z", 
+    "link": "http://www.estadao.com.br/noticias/nacional,aecio-critica-secretaria-da-micro-e-pequena-empresa,1014949,0.htm", 
+    "politician": 3, 
+    "title": "A\u00e9cio critica Secretaria da Micro e Pequena Empresa"
+  }
+},
+{
+  "pk": 5, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2012-12-19T23:25:00Z", 
+    "link": "http://g1.globo.com/politica/noticia/2012/12/dilma-recebe-ministros-no-alvorada-para-confraternizacao-de-natal.html", 
+    "politician": 1, 
+    "title": "Dilma recebe ministros no Alvorada para confraterniza\u00e7\u00e3o de Natal"
+  }
+},
+{
+  "pk": 6, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2012-12-03T10:43:00Z", 
+    "link": "http://g1.globo.com/politica/noticia/2012/12/dilma-detalha-vetos-redivisao-dos-royalties-do-petroleo-no-diario-oficial.html", 
+    "politician": 1, 
+    "title": "Dilma detalha vetos \u00e0 redivis\u00e3o dos royalties do petr\u00f3leo no Di\u00e1rio Oficial"
+  }
+},
+{
+  "pk": 7, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2011-08-19T11:09:00Z", 
+    "link": "http://g1.globo.com/bom-dia-brasil/noticia/2011/08/dilma-se-reune-com-governadores-do-sudeste-para-combater-miseria.html", 
+    "politician": 1, 
+    "title": "Dilma se re\u00fane com governadores do Sudeste para combater mis\u00e9ria"
+  }
+},
+{
+  "pk": 8, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-04-04T16:48:00Z", 
+    "link": "http://www.estadao.com.br/noticias/geral,dilma-reune-se-com-lobao-marco-da-mineracao-em-foco,1016983,0.htm", 
+    "politician": 1, 
+    "title": "Dilma re\u00fane-se com Lob\u00e3o; marco da minera\u00e7\u00e3o em foco"
+  }
+}
+]
