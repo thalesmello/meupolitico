@@ -7,12 +7,24 @@ from politicians.models import Politician
 
 class PoliticiansTest(LiveServerTestCase):
     fixtures = ['politicians.json']
+    browser = None
+
+    @classmethod
+    def setUpClass(cls):
+        cls.browser = webdriver.Firefox()
+        cls.browser.implicitly_wait(3)
+        super(PoliticiansTest, cls).setUpClass()
 
     def setUp(self):
-        self.browser = webdriver.Firefox()
+        pass
 
     def tearDown(self):
-        self.browser.close()
+        pass
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.browser.close()
+        super(PoliticiansTest, cls).tearDownClass()
 
     def test_can_access_the_homepage(self):
         # The user opens his web browser, and goes to the homepage
