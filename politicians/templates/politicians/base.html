@@ -3,14 +3,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="stylesheet" type="text/css" href="{% static 'politicians/bootstrap.min.css' %}" />
-	<link rel="stylesheet" type="text/css" href="{% static 'politicians/style.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'politicians/css/bootstrap.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'politicians/css/bootstrap-hero.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'politicians/css/bootstrap-responsive.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'politicians/css/custom.css' %}" />
     <title id="header_title">{% block title %}Meu Político{% endblock %}</title>
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'politicians/ico/apple-touch-icon-144-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'politicians/ico/apple-touch-icon-114-precomposed.png' %}">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'politicians/ico/apple-touch-icon-72-precomposed.png' %}">
+                    <link rel="apple-touch-icon-precomposed" href="{% static 'politicians/ico/apple-touch-icon-57-precomposed.png' %}">
+                                   <link rel="shortcut icon" href="{% static 'politicians/ico/favicon.png' %}">
 </head>
 
 <body>
     <div id="content">
         {% block content %}{% endblock %}
     </div>
+
+    <script src="{% static 'politicians/js/jquery.js' %}"></script>
+    <script src="{% static 'politicians/js/bootstrap-transition.js' %}"></script>
+    <script src="{% static 'politicians/js/bootstrap-alert.js' %}"></script>
+    <script src="{% static 'politicians/js/bootstrap-modal.js' %}"></script>
+    <script src="{% static 'politicians/js/bootstrap-dropdown.js' %}"></script>
+    <script src="{% static 'politicians/js/bootstrap-scrollspy.js' %}"></script>
+    <script src="{% static 'politicians/js/bootstrap-tab.js' %}"></script>
+    <script src="{% static 'politicians/js/bootstrap-tooltip.js' %}"></script>
+    <script src="{% static 'politicians/js/bootstrap-popover.js' %}"></script>
+    <script src="{% static 'politicians/js/bootstrap-button.js' %}"></script>
+    <script src="{% static 'politicians/js/bootstrap-collapse.js' %}"></script>
+    <script src="{% static 'politicians/js/bootstrap-carousel.js' %}"></script>
+    <script src="{% static 'politicians/js/bootstrap-typeahead.js' %}"></script>
 </body>
 </html>

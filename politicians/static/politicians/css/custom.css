@@ -1,0 +1,29 @@
+#logo {
+	float: left;
+	margin: 10px;
+	padding-right: 100px;
+	width: 262px;
+	height: 80px;
+}
+#frase_de_efeito {
+	width: 630px;
+	height: 115px;
+	margin: 20px;
+}
+.circ187 {
+	width: 187px;
+	height: 187px;
+}
+#fbconnectbutton{
+	margin: 10px;
+	/*width: 378px;
+	height: 96px;*/
+	width: 189px;
+	height: 48px;
+}
+div #como{
+	margin-top: 100px;
+}
+footer {
+	text-align: right;
+}
