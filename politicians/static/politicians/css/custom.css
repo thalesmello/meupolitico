@@ -21,9 +21,15 @@
 	width: 189px;
 	height: 48px;
 }
+div #estatistica{
+	margin-bottom: 30px;
+}
 div #como{
-	margin-top: 100px;
+	margin-top: 30px;
 }
 footer {
 	text-align: right;
+}
+#info{
+	color: #404040;
 }
