@@ -35,3 +35,6 @@ def search_results(request):
     politicians_list = Politician.objects.filter(name__contains=name)
     context = {'politicians_list': politicians_list}
     return render(request, 'politicians/politicians.html', context)
+
+def home(request):
+    return render(request, 'politicians/home.html')

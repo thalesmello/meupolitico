@@ -3,18 +3,25 @@
 {% block content %}
 <h1 id="heading_text">Meu Político - Perfil do Político</h1>
 <h2>{{ politician.name }}</h2>
-<p>{{ politician.party.acronym }}</p>
+<p>Partido: {{ politician.party.acronym }}</p>
 
 <h3>Notícias</h3>
 {% if recent_news %}
-    <ul>
+	<div class="row">
+    <div class="noticia-wrapper span10 offset1">
     {% for news in recent_news %}
-        <li>
-            <a href="{{ news.link }}">{{ news.title }}</a>
-             - {{news.pub_date}}
-        </li>
+    	    <div class="noticia">
+        <h3 class="news_title"><a href="{{ news.link}}">{{ news.title }}</a> </h3>
+        <p class="news_detail">
+        	 - {{news.pub_date}}
+         </p>
+         </div>
+        {% if not forloop.last %}
+        <hr class="news">
+        {% endif %}
     {% endfor %}
-    </ul>
+    </div>
+    </div>
 {% else %}
     <p>Nenhuma notícia recente.</p>
 {% endif %}

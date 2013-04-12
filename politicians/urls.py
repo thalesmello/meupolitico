@@ -4,7 +4,7 @@ from politicians import views
 
 urlpatterns = patterns('',
     # ex: /
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.home, name='home'),
     # ex: /index
     url(r'^index/$', views.index, name='index'),
     # ex: /politicians/
@@ -19,4 +19,6 @@ urlpatterns = patterns('',
     url(r'^search/$', views.search, name='search'),
     # ex: /search_results/
     url(r'^search_results/$', views.search_results, name='search_results'),
+    # ex: /home/
+    url(r'^home/$', views.home, name='home'),
 )
