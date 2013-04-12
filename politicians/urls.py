@@ -4,7 +4,7 @@ from politicians import views
 
 urlpatterns = patterns('',
     # ex: /
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.home, name='home'),
     # ex: /index
     url(r'^index/$', views.index, name='index'),
     # ex: /politicians/
