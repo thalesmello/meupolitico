@@ -1,0 +1,71 @@
+#logo {
+	float: left;
+	margin: 10px;
+	padding-right: 100px;
+	width: 262px;
+	height: 80px;
+}
+#frase_de_efeito {
+	width: 630px;
+	height: 115px;
+	margin: 20px;
+}
+.circ187 {
+	width: 187px;
+	height: 187px;
+}
+#fbconnectbutton{
+	margin: 10px;
+	/*width: 378px;
+	height: 96px;*/
+	width: 189px;
+	height: 48px;
+}
+div #estatistica{
+	margin-bottom: 30px;
+}
+div #como{
+	margin-top: 30px;
+}
+footer {
+	text-align: right;
+}
+#info{
+	color: #404040;
+}
+#content{
+	padding: 40px;
+}
+#heading_text{
+	text-align: center;
+}
+.image_subtitle{
+	font-weight: normal;
+}
+.title_text{
+	text-align: center;
+}
+.news_detail{
+	margin:0;
+	margin-left: 50px;
+}
+.noticia{
+	text-align: left;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+.noticia-wrapper{
+	background-color: #f7f7f7;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+.news_title{
+	margin:0
+}
+hr.news{
+	margin:6px;
+}
+#news_body{
+	margin:10px;
+}

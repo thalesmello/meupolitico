@@ -6,11 +6,28 @@
 {% if politicians_list %}
     <ul>
     {% for politician in politicians_list %}
-        <li><a href="{% url 'politician_profile' politician.id %}">{{ politician.name }}</a></li>
+    	{% if forloop.counter0|divisibleby:"3" %}
+    		<div class="row">
+    	{% endif %}		
+
+    	<div class="span4">
+    		<h3 class="title_text"> <a href="{% url 'politician_profile' politician.id %}">{{ politician.name }}</a></h3>
+    	</div>
+
+    	{% if forloop.counter|divisibleby:"3" %}
+    		</div>
+    	{% endif %}        
     {% endfor %}
     </ul>
 {% else %}
     <p>Nenhum político cadastrado.</p>
 {% endif %}
+{% endblock %}
 
+{% block page_js %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#top_politicos').addClass('active');
+});
+</script>
 {% endblock %}
