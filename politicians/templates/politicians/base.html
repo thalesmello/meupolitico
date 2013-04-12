@@ -50,10 +50,11 @@
                     </ul>
                   </li> -->
                 </ul>
-                <form class="navbar-form pull-right">
-                  <input class="span2" type="text" placeholder="Busca">
+                <form class="navbar-form pull-right" action="{% url 'search_results' %}" method="post">
+                  {% csrf_token %}
+                  <input class="span2" type="text" placeholder="Busca" name="name">
                   <!-- <input class="span2" type="password" placeholder="Password"> -->
-                  <button type="submit" class="btn">Buscar</button>
+                  <button type="submit" class="btn">Buscar Político</button>
                 </form>
               </div><!--/.nav-collapse -->
             </div>
