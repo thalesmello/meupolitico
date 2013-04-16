@@ -50,12 +50,22 @@
                     </ul>
                   </li> -->
                 </ul>
+				
                 <form class="navbar-form pull-right" action="{% url 'search_results' %}" method="post">
                   {% csrf_token %}
                   <input class="span2" type="text" placeholder="Busca" name="name">
                   <!-- <input class="span2" type="password" placeholder="Password"> -->
                   <button type="submit" class="btn">Buscar Político</button>
                 </form>
+				{% block login %}
+				{% if request.session.username != none %}
+					<p> Oi, {{request.session.username}}</p>
+					<li id="top_logout"><a href="{% url 'logout' %}">Fazer logout</a></li>
+				{% else %}
+					<p> Você não está logado </p>
+					<li id="top_login"><a href="{% url 'login' %}">Fazer login</a></li>
+				{% endif %}
+				{% endblock %}
               </div><!--/.nav-collapse -->
             </div>
           </div>
