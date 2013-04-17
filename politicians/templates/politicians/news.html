@@ -4,17 +4,33 @@
 <h1 id="heading_text">Meu Político - {{ news_heading }}</h1>
 
 {% if news_list %}
-    <ul>
+    <div class="row">
+    <div class="noticia-wrapper span10 offset1">
     {% for news in news_list %}
-        <li>
-        <a href="{{ news.link}}">{{ news.title }}</a> - 
-            <a href="{% url 'politician_profile' news.politician.id %}">{{ news.politician.name }}</a>
+            
+            <div class="noticia">
+        <h3 class="news_title"><a href="{{ news.link}}">{{ news.title }}</a> </h3>
+        <p class="news_detail">
+        - <a href="{% url 'politician_profile' news.politician.id %}">{{ news.politician.name }}</a>
              - {{news.pub_date}}
-        </li>
+         </p>
+         </div>
+        {% if not forloop.last %}
+        <hr class="news">
+        {% endif %}
     {% endfor %}
-    </ul>
+    </div>
+    </div>
 {% else %}
     <p>Nenhuma notícia cadastrada.</p>
 {% endif %}
 
+{% endblock %}
+
+{% block page_js %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#top_noticias').addClass('active');
+});
+</script>
 {% endblock %}
