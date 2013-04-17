@@ -2,6 +2,7 @@
 
 from django.test import TestCase
 from django.utils import timezone
+from datetime import date
 from politicians.models import *
 
 class PartyModelTest(TestCase):
@@ -33,6 +34,25 @@ class PoliticianModelTest(TestCase):
 
 class NewsModelTest(TestCase):
     def test_verbose_name_for_pub_date(self):
-        for field in News._meta.fields:
+        for field in News.get_model_fields():
             if field.name ==  'pub_date':
                 self.assertEquals('date published', field.verbose_name)
+
+    def test_user_likes_news(self):
+        user = User.objects.create(username="Zezinho", password="senhaDoZezinho")
+        party = Party.objects.create()
+        polit = Politician.objects.create(party=party)
+        news = News.objects.create(title="titulo inutil", politician=polit, pub_date=date.today())
+
+        #User will like news
+        user.like_news(news)
+        count_likes = news.get_likes_count()
+        self.assertEquals(count_likes, 1)
+        self.assertTrue(news.does_user_like_me(user))
+
+        #User count is still 1
+        user.like_news(news)
+        count_likes = news.get_likes_count()
+        self.assertEquals(count_likes, 1)
+
+
