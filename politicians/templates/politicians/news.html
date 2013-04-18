@@ -15,7 +15,7 @@
              - {{news.pub_date}}
          </p>
          </div>
-		{{ like_count }} likes
+		<p name="count">{{ like_count }} likes</p>
 		{% if like_status == None %}
 			User is not logged.
 		{% elif like_status == True %}
@@ -23,14 +23,14 @@
 			<form action="{% url 'news' %}" method="post">
 				{% csrf_token %}
 				<input type="hidden" name="unliked" value="{{ news.id }}"/>
-				<input type="submit" value="Unlike"/>
+				<input type="submit" name="unliked_button" value="Não curtir"/>
 			</form>
 		{% else %}
 			You don't like this.
 			<form action="{% url 'news' %}" method="post">
 				{% csrf_token %}
 				<input type="hidden" name="liked" value="{{ news.id }}"/>
-				<input type="submit" value="Like"/>
+				<input type="submit" value="Curtir"/>
 			</form>
 		{% endif %}
         {% if not forloop.last %}
