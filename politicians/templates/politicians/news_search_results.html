@@ -1,0 +1,9 @@
+{% if results %}
+
+	{% for news in results %}
+		<div class="row"><h3 class="news_title"><a href="{{ news.link}}">{{ news.title }}</a> </h3></div>
+	{% endfor %}
+
+{% else %}
+<p>No results.</p>
+{% endif %}

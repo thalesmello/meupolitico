@@ -2,6 +2,7 @@
 
 from django.shortcuts import render, get_object_or_404
 from politicians.models import Politician, News, User
+from datetime import datetime, timedelta
 
 def index(request):
     return render(request, 'politicians/index.html')
@@ -16,6 +17,37 @@ def politician_profile(request, politician_id):
     recent_news = politician.news_set.all().order_by('-pub_date')[:5]
     context = {'politician': politician, 'recent_news': recent_news}
     return render(request, 'politicians/politician_profile.html', context)
+
+def news_search(request):
+    return render(request, 'politicians/news_search.html')
+
+def news_search_results(request):
+    try:
+        keywords = request.POST['keywords']
+        date_option = request.POST['time']
+    except:
+        return render(request, 'politicians/news_search_results.html')
+
+    if date_option == 'this_week':
+        minimum_date = datetime.now() - timedelta(days=7)
+    elif date_option == 'this_month':
+        minimum_date = datetime.now() - timedelta(days=30)
+    elif date_option == 'this_year':
+        minimum_date = datetime.now() - timedelta(days=365)
+    else:
+        minimum_date = None
+    
+    word_list = keywords.split()
+    
+    results = []
+    for word in word_list:
+        if minimum_date is None:
+            ans = News.objects.filter(title__contains=word)
+        else:
+            ans = News.objects.filter(title__contains=word,pub_date__gte=minimum_date)
+        results = list(set(results) | set(ans))
+    context = {'results' : results }
+    return render(request, 'politicians/news_search_results.html', context)
 
 def news(request):
     news_list = News.objects.all().order_by('-pub_date')[:5]          

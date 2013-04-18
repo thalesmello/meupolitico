@@ -27,4 +27,6 @@ urlpatterns = patterns('',
     url(r'^search_results/$', views.search_results, name='search_results'),
     # ex: /home/
     url(r'^home/$', views.home, name='home'),
+    url(r'^news_search/$', views.news_search, name='news_search'),
+    url(r'^news_search_results/$', views.news_search_results, name='news_search_results')
 )

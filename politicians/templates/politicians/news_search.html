@@ -1,0 +1,12 @@
+<form action="{% url 'news_search_results' %}" method="post">
+    {% csrf_token %}
+    Palavras-chave: <input type="text" name="keywords"/><br>
+	Publicada:
+	<select name="time">
+		<option value="this_week">Nesta semana</option>
+		<option value="this_month">Neste mes</option>
+		<option value="this_year">Neste ano</option>
+		<option value="all_time">Qualquer data</option>
+	</select>
+    <input type="submit" value="Buscar" />
+</form>

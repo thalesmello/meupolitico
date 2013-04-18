@@ -123,7 +123,7 @@ class PoliticiansTest(LiveServerTestCase):
         except:
             pass
         try:
-            self.browser.find_element_by_name('like_button')
+            self.browser.find_element_by_name('unlike_button')
             assert 0
         except:
             pass
@@ -174,3 +174,32 @@ class PoliticiansTest(LiveServerTestCase):
                 ct1=ct1+1
         assert ct0==5 and ct1==0
         pass
+
+    def test_user_searches_news(self):
+        self.browser.get(self.live_server_url)
+        el = self.browser.find_element_by_link_text('Procurar noticias')
+        el.click()
+        keywords = self.browser.find_element_by_name('keywords')
+        keywords.send_keys('critica royalties')
+        time = self.browser.find_element_by_name('time')
+        for option in time.find_elements_by_tag_name('option'):
+            if option.text == 'Nesta semana':
+                option.click()
+        submit = self.browser.find_element_by_css_selector('input[type="submit"]')
+        submit.click()
+        
+        assert self.browser.find_element_by_xpath("//*[contains(.,'No results')]")
+        self.browser.back()
+
+        keywords = self.browser.find_element_by_name('keywords')
+        keywords.clear()
+        keywords.send_keys('critica royalties')
+        time = self.browser.find_element_by_name('time')
+        for option in time.find_elements_by_tag_name('option'):
+            if option.text == 'Qualquer data':
+                option.click()
+        submit = self.browser.find_element_by_css_selector('input[type="submit"]')
+        submit.click()
+
+        assert self.browser.find_element_by_xpath("//*[contains(.,'critica Secretaria da Micro')]")
+        assert self.browser.find_element_by_xpath("//*[contains(.,'Dilma detalha vetos')]")
