@@ -1,5 +1,7 @@
-<form action="{% url 'search_results' %}" method="post">
-    {% csrf_token %}
-    <input type="text" name="name" />
-    <input type="submit" value="Submeter" />
-</form>
+{% extends "politicians/base.html" %}
+
+{% block title %}Meu Político{% endblock %}
+
+{% block content %}
+    {% include "politicians/search_form.html" %}
+{% endblock %}

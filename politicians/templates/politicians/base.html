@@ -3,84 +3,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="stylesheet" type="text/css" href="{% static 'politicians/css/bootstrap.css' %}" />
-	<link rel="stylesheet" type="text/css" href="{% static 'politicians/css/bootstrap-hero.css' %}" />
-	<link rel="stylesheet" type="text/css" href="{% static 'politicians/css/bootstrap-responsive.css' %}" />
-	<link rel="stylesheet" type="text/css" href="{% static 'politicians/css/custom.css' %}" />
-    <title id="header_title">{% block title %}Meu Político{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'politicians/css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'politicians/css/bootstrap-hero.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'politicians/css/bootstrap-responsive.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'politicians/css/custom.css' %}" />
+    
+    <title id="header_title">
+        {% block title %}Meu Político{% endblock %}
+    </title>
 
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'politicians/ico/apple-touch-icon-144-precomposed.png' %}">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'politicians/ico/apple-touch-icon-114-precomposed.png' %}">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'politicians/ico/apple-touch-icon-72-precomposed.png' %}">
-                    <link rel="apple-touch-icon-precomposed" href="{% static 'politicians/ico/apple-touch-icon-57-precomposed.png' %}">
-                                   <link rel="shortcut icon" href="{% static 'politicians/ico/favicon.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'politicians/ico/apple-touch-icon-72-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" href="{% static 'politicians/ico/apple-touch-icon-57-precomposed.png' %}">
+    <link rel="shortcut icon" href="{% static 'politicians/ico/favicon.png' %}">
 </head>
 
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" id="topo">
-          <div class="navbar-inner">
+        <div class="navbar-inner">
             <div class="container">
-              <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-              </button>
+                </button>
 
-              <a href="/">
-                <img id="logo" src="{{ STATIC_URL }}politicians/images/logo.png" alt="Meu Político">
-              </a>
+                <a href="/"><img id="logo" src="{% static 'politicians/images/logo.png' %}" alt="Meu Político"></a>
 
-              <div class="nav-collapse collapse">
-                <ul class="nav">
-                  <li id="top_home"><a href="{% url 'home' %}">Home</a></li>
-                  <li id="top_sobre"><a href="#sobre">Sobre</a></li>
-                  <li id="top_politicos"><a href="{% url 'politicians' %}">Políticos</a></li>
-                  <li id="top_noticias"><a href="{% url 'news' %}">Notícias</a></li>
-                  <li id="top_contato"><a href="#contato">Contato</a></li>
-                  <!-- <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
-                      <li class="divider"></li>
-                      <li class="nav-header">Nav header</li>
-                      <li><a href="#">Separated link</a></li>
-                      <li><a href="#">One more separated link</a></li>
+                {% if request.session.username != none %}
+                    <p> Bem vindo, {{request.session.username}} </p>
+                    <p id="top_logout"><a href="{% url 'logout' %}">Fazer logout</a></p>
+                {% else %}
+                    <p> Você não está logado. </p>
+                    <p id="top_login"><a href="{% url 'login' %}">Fazer login</a></p>
+                {% endif %}
+
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li id="top_home"><a href="{% url 'home' %}">Home</a></li>
+                        <li id="top_sobre"><a href="{% url 'home' %}">Sobre</a></li>
+                        <li id="top_politicos"><a href="{% url 'politicians' %}">Políticos</a></li>
+                        <li id="top_noticias"><a href="{% url 'news' %}">Notícias</a></li>
+                        <li id="top_contato"><a href="{% url 'home' %}">Contato</a></li>
+                        <!-- <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li class="nav-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                        </ul>
+                        </li> -->
                     </ul>
-                  </li> -->
-                </ul>
-				
-                <form class="navbar-form pull-right" action="{% url 'search_results' %}" method="post">
-                  {% csrf_token %}
-                  <input class="span2" type="text" placeholder="Busca" name="name">
-                  <!-- <input class="span2" type="password" placeholder="Password"> -->
-                  <button type="submit" class="btn">Buscar Político</button>
-                </form>
-				{% block login %}
-				{% if request.session.username != none %}
-					<p> Oi, {{request.session.username}}</p>
-					<li id="top_logout"><a href="{% url 'logout' %}">Fazer logout</a></li>
-				{% else %}
-					<p> Você não está logado </p>
-					<li id="top_login"><a href="{% url 'login' %}">Fazer login</a></li>
-				{% endif %}
-				{% endblock %}
-              </div><!--/.nav-collapse -->
+
+                    {% include 'politicians/search_form.html' with class="navbar-form pull-right" %}
+
+                </div> <!--/.nav-collapse -->
             </div>
-          </div>
         </div>
+    </div>
 
     <div id="content">
         <div class="container">
             {% block content %}{% endblock %}
+        </div> <!-- /container -->
+
         <hr>
 
-      <footer>
-        <p>&copy; Comp-14</p>
-      </footer>
-
-    </div> <!-- /container -->
+        <footer>
+            {% block footer %}<p>&copy; Comp-14</p>{% endblock %}
+        </footer>
     </div>
 
     <script src="{% static 'politicians/js/jquery.js' %}"></script>
@@ -98,6 +94,13 @@
     <script src="{% static 'politicians/js/bootstrap-typeahead.js' %}"></script>
     <script src="{% static 'politicians/js/custom.js' %}"></script>
 
-    {% block page_js %}{% endblock %}
+    {% block page_js %}
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#top_home').addClass('active');
+            });
+        </script>
+    {% endblock %}
+
 </body>
 </html>
