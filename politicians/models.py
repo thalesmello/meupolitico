@@ -41,3 +41,6 @@ class User(models.Model):
     
     def like_news(self,news):
         self.news_liked.add(news)
+        
+    def unlike_news(self,news):
+        self.news_liked.remove(news)
