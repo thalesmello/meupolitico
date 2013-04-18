@@ -61,7 +61,7 @@ class PoliticiansTest(LiveServerTestCase):
          element.click()
          self.assertEquals(self.live_server_url + '/politicians/', self.browser.current_url)'''
 
-    '''def test_can_access_a_politicians_list_page(self):
+    def test_can_access_a_politicians_list_page(self):
         # The user opens his web browser, and goes to the politicians page
         self.browser.get(self.live_server_url + '/politicians/')
 
@@ -142,7 +142,7 @@ class PoliticiansTest(LiveServerTestCase):
         for el in self.browser.find_elements_by_name('count'):
             if "0 likes" in el.text:
                 ct=ct+1    
-        assert ct==5'''
+        assert ct==5
         
     def test_user_changes_like_status(self):
         self.browser.get(self.live_server_url+'/login/')

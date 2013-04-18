@@ -23,14 +23,14 @@
 			<form action="{% url 'news' %}" method="post">
 				{% csrf_token %}
 				<input type="hidden" name="unliked" value="{{ news.id }}"/>
-				<input type="submit" name="unliked_button" value="Não curtir"/>
+				<input type="submit" name="unlike_button" value="Não curtir"/>
 			</form>
 		{% else %}
 			You don't like this.
 			<form action="{% url 'news' %}" method="post">
 				{% csrf_token %}
 				<input type="hidden" name="liked" value="{{ news.id }}"/>
-				<input type="submit" value="Curtir"/>
+				<input type="submit" name="like_button" value="Curtir"/>
 			</form>
 		{% endif %}
         {% if not forloop.last %}
