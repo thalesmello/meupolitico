@@ -57,8 +57,7 @@ class PoliticiansTest(LiveServerTestCase):
         self.browser.get(self.live_server_url)
 
         # The user sees if he can reach the politicians list page
-        element = self.browser.find_element_by_link_text(u'Políticos')
-        element.click()
+        self.browser.find_element_by_link_text(u'Políticos').click()
         self.assertEquals(self.live_server_url + '/politicians/', self.browser.current_url)
 
     def test_can_access_a_politicians_list_page(self):
