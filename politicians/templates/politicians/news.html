@@ -7,34 +7,35 @@
     <div class="row">
     <div class="noticia-wrapper span10 offset1">
     {% for news, like_count, like_status in news_entry %}
-            
-            <div class="noticia">
-        <h3 class="news_title"><a href="{{ news.link}}">{{ news.title }}</a> </h3>
-        <p class="news_detail">
-        - <a href="{% url 'politician_profile' news.politician.id %}">{{ news.politician.name }}</a>
-             - {{news.pub_date}}
-         </p>
-         </div>
-		<p name="count">{{ like_count }} likes</p>
-		{% if like_status == None %}
-			User is not logged.
-		{% elif like_status == True %}
-			You like this.
-			<form action="{% url 'news' %}" method="post">
-				{% csrf_token %}
-				<input type="hidden" name="unliked" value="{{ news.id }}"/>
-				<input type="submit" name="unlike_button" value="Não curtir"/>
-			</form>
-		{% else %}
-			You don't like this.
-			<form action="{% url 'news' %}" method="post">
-				{% csrf_token %}
-				<input type="hidden" name="liked" value="{{ news.id }}"/>
-				<input type="submit" name="like_button" value="Curtir"/>
-			</form>
-		{% endif %}
+
+        <div class="noticia">
+            <h3 class="news_title"><a href="{{ news.link}}">{{ news.title }}</a> </h3>
+            <p class="news_detail">
+            - <a href="{% url 'politician_profile' news.politician.id %}">{{ news.politician.name }}</a>
+                 - {{news.pub_date}}
+            </p>
+        </div>
+
+        <p name="count">{{ like_count }} likes</p>
+        {% if like_status == None %}
+        {% elif like_status == True %}
+            You like this.
+            <form action="{% url 'news' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="unliked" value="{{ news.id }}"/>
+                <input type="submit" name="unlike_button" value="Não curtir"/>
+            </form>
+        {% else %}
+            You don't like this.
+            <form action="{% url 'news' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="liked" value="{{ news.id }}"/>
+                <input type="submit" name="like_button" value="Curtir"/>
+            </form>
+        {% endif %}
+
         {% if not forloop.last %}
-        <hr class="news">
+            <hr class="news">
         {% endif %}
     {% endfor %}
     </div>
@@ -43,12 +44,4 @@
     <p>Nenhuma notícia cadastrada.</p>
 {% endif %}
 
-{% endblock %}
-
-{% block page_js %}
-<script type="text/javascript">
-$(document).ready(function(){
-    $('#top_noticias').addClass('active');
-});
-</script>
 {% endblock %}

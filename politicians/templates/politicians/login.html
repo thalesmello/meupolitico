@@ -1,7 +1,7 @@
-<form action="{% url 'login_user' %}" method="post">
-    {% csrf_token %}
-	<p>{{ message }}</p>
-    <input type="text" name="name" />
-	<input type="password" name="password" />
-    <input type="submit" value="Submeter" />
-</form>
+{% extends "politicians/base.html" %}
+
+{% block title %}Meu Político{% endblock %}
+
+{% block content %}
+    {% include "politicians/login_form.html" %}
+{% endblock %}

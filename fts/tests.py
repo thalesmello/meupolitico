@@ -31,35 +31,35 @@ class PoliticiansTest(LiveServerTestCase):
         cls.browser.close()
         super(PoliticiansTest, cls).tearDownClass()
 
-    '''def test_can_access_the_homepage(self):
-         # The user opens his web browser, and goes to the homepage
-         self.browser.get(self.live_server_url)
+    def test_can_access_the_homepage(self):
+        # The user opens his web browser, and goes to the homepage
+        self.browser.get(self.live_server_url)
 
-         # The user sees if the page contains the information in hp_data
-         hp_data = {'header_title': u'Meu Político', 'heading_text': u'Meu Político'}
-         for id, value in hp_data.iteritems():
-             element = self.browser.find_element_by_id(id)
-             self.assertIn(value, element.text)
+        # The user sees if the page contains the information in hp_data
+        hp_data = {'header_title': u'Meu Político'}
+        for id, value in hp_data.iteritems():
+            element = self.browser.find_element_by_id(id)
+            self.assertIn(value, element.text)
 
     def test_can_see_links_on_homepage(self):
-         # The user opens his web browser, and goes to the homepage
-         self.browser.get(self.live_server_url)
+        # The user opens his web browser, and goes to the homepage
+        self.browser.get(self.live_server_url)
 
-         # The user sees if the page contains the expected links
-         links = {'/politicians/': u'Lista de Políticos', '/news/': u'Lista de Notícias'}
-         for relative_url, text in links.iteritems():
-             element = self.browser.find_element_by_link_text(text)
-             link = self.live_server_url + relative_url
-             self.assertEquals(link, element.get_attribute('href'))
+        # The user sees if the page contains the expected links
+        links = {'/politicians/': u'Políticos', '/news/': u'Notícias'}
+        for relative_url, text in links.iteritems():
+            element = self.browser.find_element_by_link_text(text)
+            link = self.live_server_url + relative_url
+            self.assertEquals(link, element.get_attribute('href'))
 
     def test_can_navigate_from_homepage_to_politicians_list_page(self):
-         # The user opens his web browser, and goes to the homepage
-         self.browser.get(self.live_server_url)
+        # The user opens his web browser, and goes to the homepage
+        self.browser.get(self.live_server_url)
 
-         # The user sees if he can reach the politicians list page
-         element = self.browser.find_element_by_link_text(u'Lista de Políticos')
-         element.click()
-         self.assertEquals(self.live_server_url + '/politicians/', self.browser.current_url)'''
+        # The user sees if he can reach the politicians list page
+        element = self.browser.find_element_by_link_text(u'Políticos')
+        element.click()
+        self.assertEquals(self.live_server_url + '/politicians/', self.browser.current_url)
 
     def test_can_access_a_politicians_list_page(self):
         # The user opens his web browser, and goes to the politicians page
