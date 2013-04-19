@@ -30,17 +30,17 @@ class News(models.Model):
 
     def does_user_like_me(self, user):
         return (user in self.user_set.all())
-        
+
 class User(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=20)
     news_liked = models.ManyToManyField(News)
-    
+
     def __unicode__(self):
         return self.username
-    
+
     def like_news(self,news):
         self.news_liked.add(news)
-        
+
     def unlike_news(self,news):
         self.news_liked.remove(news)

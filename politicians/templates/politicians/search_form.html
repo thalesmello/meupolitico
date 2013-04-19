@@ -1,5 +1,5 @@
 <form class={{ class|default:"form" }} action={% url 'search_results' %} method={{ method|default:"post" }}>
     {% csrf_token %}
-    <input class="span2" type="text" name="name" placeholder={{ input|default:"Nome" }} />
+    <input id="search_text" class="span2" type="text" name="name" placeholder={{ input|default:"Nome" }} />
     <button class="btn" type="submit">{{ button|default:"Encontrar Político" }}</button>
 </form>

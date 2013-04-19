@@ -17,6 +17,8 @@ urlpatterns = patterns('',
     url(r'^login/$', views.login, name='login'),
     # ex: /login_user/
     url(r'^login_user/$', views.login_user, name='login_user'),
+    # ex: /signup_user/
+    url(r'^signup_user/$', views.signup_user, name='signup_user'),
     # ex: /logout/
     url(r'^logout/$', views.logout, name='logout'),
     # ex: /news/

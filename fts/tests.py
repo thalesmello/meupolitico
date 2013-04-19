@@ -13,7 +13,7 @@ class PoliticiansTest(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         cls.browser = webdriver.Firefox()
-        cls.browser.implicitly_wait(3)
+        cls.browser.implicitly_wait(5)
         super(PoliticiansTest, cls).setUpClass()
 
     def setUp(self):
@@ -107,13 +107,11 @@ class PoliticiansTest(LiveServerTestCase):
 
     def test_can_login(self):
         self.browser.get(self.live_server_url+'/login/')
-        name = self.browser.find_element_by_name('name')
-        pwd = self.browser.find_element_by_name('password')
-        name.send_keys('felipe')
-        pwd.send_keys('awesomeness.py revived')
-        submit = self.browser.find_element_by_css_selector('input[type="submit"]')
-        submit.click()
-        assert self.browser.find_element_by_xpath("//*[contains(.,'Oi, felipe')]")
+        self.browser.find_element_by_id('login_username').send_keys('felipe')
+        self.browser.find_element_by_id('login_password').send_keys('awesomeness.py revived')
+        self.browser.find_element_by_id('login_button').click()
+        body = self.browser.find_element_by_tag_name('body')
+        self.assertIn(u'Bem vindo, felipe', body.text)
 
     def test_no_like_buttons_when_not_logged(self):
         self.browser.get(self.live_server_url+'/news/')
@@ -130,12 +128,9 @@ class PoliticiansTest(LiveServerTestCase):
         
     def test_user_sees_like_buttons(self):
         self.browser.get(self.live_server_url+'/login/')
-        name = self.browser.find_element_by_name('name')
-        pwd = self.browser.find_element_by_name('password')
-        name.send_keys('felipe')
-        pwd.send_keys('awesomeness.py revived')
-        submit = self.browser.find_element_by_css_selector('input[type="submit"]')
-        submit.click()
+        self.browser.find_element_by_id('login_username').send_keys('felipe')
+        self.browser.find_element_by_id('login_password').send_keys('awesomeness.py revived')
+        self.browser.find_element_by_id('login_button').click()
         self.browser.get(self.live_server_url+'/news/')
         assert len(self.browser.find_elements_by_name('like_button'))==5
         ct=0
@@ -146,15 +141,11 @@ class PoliticiansTest(LiveServerTestCase):
         
     def test_user_changes_like_status(self):
         self.browser.get(self.live_server_url+'/login/')
-        name = self.browser.find_element_by_name('name')
-        pwd = self.browser.find_element_by_name('password')
-        name.send_keys('felipe')
-        pwd.send_keys('awesomeness.py revived')
-        submit = self.browser.find_element_by_css_selector('input[type="submit"]')
-        submit.click()
+        self.browser.find_element_by_id('login_username').send_keys('felipe')
+        self.browser.find_element_by_id('login_password').send_keys('awesomeness.py revived')
+        self.browser.find_element_by_id('login_button').click()
         self.browser.get(self.live_server_url+'/news/')
-        button = self.browser.find_elements_by_css_selector('input[type="submit"]')[0]
-        button.click()
+        self.browser.get(self.live_server_url+'/news/')
         ct0=0
         ct1=0
         for el in self.browser.find_elements_by_name('count'):

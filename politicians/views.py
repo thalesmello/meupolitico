@@ -39,15 +39,14 @@ def news_search_results(request):
     
     word_list = keywords.split()
     
-    results = []
+    news_list = []
     for word in word_list:
         if minimum_date is None:
             ans = News.objects.filter(title__contains=word)
         else:
             ans = News.objects.filter(title__contains=word,pub_date__gte=minimum_date)
-        results = list(set(results) | set(ans))
-    context = {'results' : results }
-    return render(request, 'politicians/news_search_results.html', context)
+        news_list = list(set(news_list) | set(ans))
+    return render(request, 'politicians/news.html', context_for_news_list(request,news_list))
 
 def context_for_news_list(request,news_list):
     try:
@@ -99,18 +98,41 @@ def login(request):
     return render(request, 'politicians/login.html')
 
 def login_user(request):
-    name = request.POST['name']
-    try:
-        user = User.objects.get(username=name)
-    except User.DoesNotExist:
-        context = {'message': "Usuario inexistente"}
-        return render(request, 'politicians/login.html', context)
-    if user.password == request.POST['password']:
-        request.session['username'] = user.username
-        return render(request, 'politicians/home.html')
+    if request.method == 'POST':
+        try:
+            name = request.POST['name']
+            user = User.objects.get(username=name)
+        except User.DoesNotExist:
+            context = {'message': "Usuario inexistente"}
+            return render(request, 'politicians/login.html', context)
+        if user.password == request.POST['password']:
+            request.session['username'] = user.username
+            return render(request, 'politicians/home.html')
+        else:
+            context = {'message': "Senha incorreta"}
+            return render(request, 'politicians/login.html', context)
     else:
-        context = {'message': "Senha incorreta"}
-        return render(request, 'politicians/login.html', context)
+        return render(request, 'politicians/home.html')
+
+def signup_user(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+        if password1 == password2:
+            try:
+                User.objects.get(username=name)
+                return render(request, 'politicians/login.html')
+            except User.DoesNotExist:
+                try:
+                    user = User.objects.create(username=name, password=password1)
+                    request.session['username'] = user.username
+                    return render(request, 'politicians/home.html')
+                except:
+                    return render(request, 'politicians/login.html')
+        else:
+            return render(request, 'politicians/login.html')
+    return render(request, 'politicians/home.html')
 
 def logout(request):
     del request.session['username']
