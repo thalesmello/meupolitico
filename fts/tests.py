@@ -4,7 +4,7 @@ from django.test import LiveServerTestCase
 from selenium import webdriver
 from time import sleep
 
-from politicians.models import Politician, User
+from politicians.models import Politician, User, News
 
 class PoliticiansTest(LiveServerTestCase):
     fixtures = ['politicians.json']
@@ -203,3 +203,26 @@ class PoliticiansTest(LiveServerTestCase):
 
         assert self.browser.find_element_by_xpath("//*[contains(.,'critica Secretaria da Micro')]")
         assert self.browser.find_element_by_xpath("//*[contains(.,'Dilma detalha vetos')]")
+
+    def test_bias(self):
+        news_set = News.objects.all().order_by('-pub_date')[:5]
+        obj1 = news_set[1]
+        obj2 = news_set[2]
+        obj1.bias = True
+        obj1.save()
+        obj2.bias = True
+        obj2.save()
+        self.browser.get(self.live_server_url+'/news/')
+        news0 = self.browser.find_element_by_css_selector('#bias0')
+        news1 = self.browser.find_element_by_css_selector('#bias1')
+        news2 = self.browser.find_element_by_css_selector('#bias2')
+        news3 = self.browser.find_element_by_css_selector('#bias3')
+        news4 = self.browser.find_element_by_css_selector('#bias4')
+
+        self.assertIn(u'Confiavel', news0.text)
+        self.assertIn(u'Tendenciosa', news1.text)
+        self.assertIn(u'Tendenciosa', news2.text)
+        self.assertIn(u'Confiavel', news3.text)
+        self.assertIn(u'Confiavel', news4.text)
+        # self.assertIn(element, )
+        pass

@@ -82,7 +82,8 @@ def context_for_news_list(request,news_list):
         else:
             news_like_status.append(None)
 
-    news_entry = zip(news_list,news_like_count,news_like_status)
+    num_news_list = range(len(news_list))
+    news_entry = zip(news_list,news_like_count,news_like_status, num_news_list)
 
     return {'news_heading': 'Notícias Recentes', 'news_entry': news_entry}
     
