@@ -69,3 +69,27 @@ hr.news{
 #news_body{
 	margin:10px;
 }
+.nav-collapse.collapse{
+	padding-top: 0
+}
+div #busca{
+	padding-top: 10px;
+	display:inline-block;
+	float:right;
+	width: auto;
+	text-align: center;
+}
+div #login_header{
+	padding-right: 30px;
+	padding-top: 20px;
+	display:inline-block;
+	float:right;
+	width: auto;
+	text-align: center;
+}
+#top_buttons{
+	padding-top: 30px;
+}
+div #login_page{
+	text-align: center;
+}

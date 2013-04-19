@@ -1,5 +1,9 @@
+<div id="busca">
 <form class={{ class|default:"form" }} action={% url 'search_results' %} method={{ method|default:"post" }}>
     {% csrf_token %}
-    <input id="search_text" class="span2" type="text" name="name" placeholder={{ input|default:"Nome" }} />
-    <button class="btn" type="submit">{{ button|default:"Encontrar Político" }}</button>
+    <input id="search_text" class="span2" type="text" name="name" placeholder={{ input|default:"Buscar Político" }} />
 </form>
+<form class={{ class|default:"form" }} action={% url 'news_search' %}>
+    <button class="btn" type="submit">{{ button|default:"Busca Avançada" }}</button>
+</form>
+</div>

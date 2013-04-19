@@ -30,7 +30,7 @@
                 </button>
 
                 <a href="/"><img id="logo" src="{% static 'politicians/images/logo.png' %}" alt="Meu Político"></a>
-
+<!-- 
                 {% if request.session.username != none %}
                     <p> Bem vindo, {{request.session.username}} </p>
                     <p id="top_logout"><a href="{% url 'logout' %}">Fazer logout</a></p>
@@ -38,14 +38,14 @@
                     <p> Você não está logado. </p>
                     <p id="top_login"><a href="{% url 'login' %}">Fazer login</a></p>
                 {% endif %}
-
+ -->
                 <div class="nav-collapse collapse">
-                    <ul class="nav">
+                    <ul class="nav" id="top_buttons">
                         <li id="top_home"><a href="{% url 'home' %}">Home</a></li>
                         <li id="top_sobre"><a href="{% url 'home' %}">Sobre</a></li>
                         <li id="top_politicos"><a href="{% url 'politicians' %}">Políticos</a></li>
                         <li id="top_noticias"><a href="{% url 'news' %}">Notícias</a></li>
-                        <li id="top_busca"><a href="{% url 'news_search' %}">Busca Avançada</a></li>
+                        <!-- <li id="top_busca"><a href="{% url 'news_search' %}">Busca Avançada</a></li> -->
                         <li id="top_contato"><a href="{% url 'home' %}">Contato</a></li>
                         <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
@@ -59,10 +59,11 @@
                         <li><a href="#">One more separated link</a></li>
                         </ul>
                         </li> -->
-                    </ul>
+                    </ul>                    
 
                     {% include 'politicians/search_form.html' with class="navbar-form pull-right" %}
 
+                    {% include 'politicians/login_header.html' with class="navbar-form pull-right" %}
                 </div> <!--/.nav-collapse -->
             </div>
         </div>
@@ -92,16 +93,12 @@
     <script src="{% static 'politicians/js/bootstrap-button.js' %}"></script>
     <script src="{% static 'politicians/js/bootstrap-collapse.js' %}"></script>
     <script src="{% static 'politicians/js/bootstrap-carousel.js' %}"></script>
-    <script src="{% static 'politicians/js/bootstrap-typeahead.js' %}"></script>
-    <script src="{% static 'politicians/js/custom.js' %}"></script>
+    <script src="{% static 'politicians/js/bootstrap-typeahead.js' %}"></script>    
 
     {% block page_js %}
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $('#top_home').addClass('active');
-            });
-        </script>
     {% endblock %}
+
+    <script src="{% static 'politicians/js/custom.js' %}"></script>
 
 </body>
 </html>
