@@ -2,8 +2,8 @@
 <form class={{ class|default:"form" }} action={% url 'signup_user' %} method={{ method|default:"post" }}>
     {% csrf_token %}
     <p>{{ message }}</p>
-    <input class="span2" type="text" name="name" placeholder={{ input|default:"Digite seu nome de usuário" }} /><br />
-    <input class="span2" type="password" name="password1" placeholder={{ input|default:"Digite uma senha" }} /><br />
-    <input class="span2" type="password" name="password2" placeholder={{ input|default:"Confirme sua senha" }} /><br />
+    <input class="span2" type="text" name="name" placeholder="Digite seu nome de usuário" /><br />
+    <input class="span2" type="password" name="password1" placeholder="Digite uma senha" /><br />
+    <input class="span2" type="password" name="password2" placeholder="Confirme sua senha" /><br />
     <button class="btn" type="submit">{{ button|default:"Cadastrar" }}</button>
 </form>
