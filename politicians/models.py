@@ -1,5 +1,23 @@
 from django.db import models
 
+class Estado(models.Model):
+    name = models.CharField(max_length=30)
+    acronym = models.CharField(max_length=2)
+    def __unicode__(self):
+        return self.acronym
+
+class Cidade(models.Model):
+    name = models.CharField(max_length=50)
+    cidade = models.ForeignKey(Estado)
+    acronym = models.CharField(max_length=55)
+    def __unicode__(self):
+        return self.acronym
+
+class Cargo(models.Model):
+    name = models.CharField(max_length=100)
+    def __unicode__(self):
+        return self.name
+
 class Party(models.Model):
     name = models.CharField(max_length=100)
     acronym = models.CharField(max_length=10)
@@ -8,7 +26,20 @@ class Party(models.Model):
 
 class Politician(models.Model):
     name = models.CharField(max_length=100)
+    foto_url = models.CharField(max_length=100)
     party = models.ForeignKey(Party)
+    cargo = models.ForeignKey(Cargo)
+    cidade = models.ForeignKey(Cidade)
+    telefone = models.CharField(max_length=20)
+    wikipedia = models.CharField(max_length=80)
+    youtube = models.CharField(max_length=80)
+    twitter = models.CharField(max_length=80)
+    facebook = models.CharField(max_length=80)
+    estrela1 = models.IntegerField(default=0)
+    estrela2 = models.IntegerField(default=0)
+    estrela3 = models.IntegerField(default=0)
+    estrela4 = models.IntegerField(default=0)
+    estrela5 = models.IntegerField(default=0)
     def __unicode__(self):
         return self.name
 
