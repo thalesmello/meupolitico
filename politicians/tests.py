@@ -62,3 +62,5 @@ class CrawlerTest(TestCase):
         party = Party.objects.create()
         polit = Politician.objects.create(name='Dilma', party=party)
         add_news_to_db()
+        second = add_news_to_db()
+        self.assertEquals(second, 0)

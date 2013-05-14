@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
 from politicians.models import Politician, News, User
-from datetime import datetime, timedelta
+from django.utils import timezone
+from datetime import timedelta
+from crawler import add_news_to_db
 
 def home(request):
     return render(request, 'politicians/home.html')
@@ -36,16 +39,16 @@ def news_search_results(request):
         return render(request, 'politicians/news_search_results.html')
 
     if date_option == 'this_week':
-        minimum_date = datetime.now() - timedelta(days=7)
+        minimum_date = timezone.now() - timedelta(days=7)
     elif date_option == 'this_month':
-        minimum_date = datetime.now() - timedelta(days=30)
+        minimum_date = timezone.now() - timedelta(days=30)
     elif date_option == 'this_year':
-        minimum_date = datetime.now() - timedelta(days=365)
+        minimum_date = timezone.now() - timedelta(days=365)
     else:
         minimum_date = None
-    
+
     word_list = keywords.split()
-    
+
     news_list = []
     for word in word_list:
         if minimum_date is None:
@@ -91,10 +94,10 @@ def context_for_news_list(request,news_list):
     news_entry = zip(news_list,news_like_count,news_like_status)
 
     return {'news_heading': 'Notícias Recentes', 'news_entry': news_entry}
-    
+
 
 def news(request):
-    news_list = News.objects.all().order_by('-pub_date')[:5]      
+    news_list = News.objects.all().order_by('-pub_date')[:5]
     return render(request, 'politicians/news.html', context_for_news_list(request,news_list))
 
 def all_news(request):
@@ -186,3 +189,6 @@ def unfavorite_politician(request):
     except KeyError, User.DoesNotExist:
         pass
     return redirect(original_page)
+def call_crawler(request):
+    news_added = add_news_to_db()
+    return HttpResponse("{} news were added to DB".format(news_added))

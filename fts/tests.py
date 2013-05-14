@@ -2,6 +2,7 @@
 
 from django.test import LiveServerTestCase
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from time import sleep
 
 from politicians.models import Politician, User
@@ -109,8 +110,13 @@ class PoliticiansTest(LiveServerTestCase):
         self.browser.find_element_by_id('login_username').send_keys('felipe')
         self.browser.find_element_by_id('login_password').send_keys('awesomeness.py revived')
         self.browser.find_element_by_id('login_button').click()
-        body = self.browser.find_element_by_tag_name('body')
-        self.assertIn(u'Bem vindo, felipe', body.text)
+        el = self.browser.find_element_by_id('login_header')
+        if not el.is_displayed():
+            unhide = self.browser.find_element_by_id('collapse_btn')
+            unhide.click()
+        el = self.browser.find_element_by_id('login_message')
+        if el.is_displayed():
+            self.assertEquals(u'Bem vindo, felipe', el.text)
 
     def test_no_like_buttons_when_not_logged(self):
         self.browser.get(self.live_server_url+'/news/')
@@ -152,8 +158,9 @@ class PoliticiansTest(LiveServerTestCase):
                 ct0=ct0+1
             elif "1 likes" in el.text:
                 ct1=ct1+1
-        assert ct0==4 and ct1==1
-        button = self.browser.find_elements_by_css_selector('input[type="submit"]')[0]
+        assert ct0==5
+        assert ct1==0
+        button = self.browser.find_elements_by_name('like_button')[0]
         button.click()
         ct0=0
         ct1=0
@@ -162,12 +169,17 @@ class PoliticiansTest(LiveServerTestCase):
                 ct0=ct0+1
             elif "1 likes" in el.text:
                 ct1=ct1+1
-        assert ct0==5 and ct1==0
+        assert ct0==4
+        assert ct1==1
         pass
 
     def test_user_searches_news(self):
         self.browser.get(self.live_server_url)
-        el = self.browser.find_element_by_link_text('Procurar noticias')
+        el = self.browser.find_element_by_id('news_search_btn')
+        if not el.is_displayed():
+            unhide = self.browser.find_element_by_id('collapse_btn')
+            unhide.click()
+        el = self.browser.find_element_by_id('news_search_btn')
         el.click()
         keywords = self.browser.find_element_by_name('keywords')
         keywords.send_keys('critica royalties')
@@ -177,8 +189,9 @@ class PoliticiansTest(LiveServerTestCase):
                 option.click()
         submit = self.browser.find_element_by_css_selector('input[type="submit"]')
         submit.click()
-        
-        assert self.browser.find_element_by_xpath("//*[contains(.,'No results')]")
+
+        body = self.browser.find_element_by_tag_name('body')
+        self.assertIn(u'Nenhuma notícia cadastrada.', body.text)
         self.browser.back()
 
         keywords = self.browser.find_element_by_name('keywords')
@@ -191,5 +204,6 @@ class PoliticiansTest(LiveServerTestCase):
         submit = self.browser.find_element_by_css_selector('input[type="submit"]')
         submit.click()
 
-        assert self.browser.find_element_by_xpath("//*[contains(.,'critica Secretaria da Micro')]")
-        assert self.browser.find_element_by_xpath("//*[contains(.,'Dilma detalha vetos')]")
+        body = self.browser.find_element_by_tag_name('body')
+        self.assertIn(u'critica Secretaria da Micro', body.text)
+        self.assertIn(u'Dilma detalha vetos', body.text)

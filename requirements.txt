@@ -3,3 +3,4 @@ dj-database-url==0.2.1
 django-facebook==5.0.12
 virtualenv==1.9.1
 feedparser
+python-dateutil
