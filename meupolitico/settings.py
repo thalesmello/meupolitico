@@ -46,8 +46,7 @@ USE_I18N = True
 USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = False  # Colocamos como falso para silenciar um warning de timezone,
-                # uma vez que ainda não precisamos de timezone
+USE_TZ = True  # Colocamos como falso para silenciar um warning de timezone,
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
