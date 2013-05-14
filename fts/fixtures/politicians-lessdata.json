@@ -1,0 +1,28 @@
+[
+{
+  "pk": 1, 
+  "model": "politicians.party", 
+  "fields": {
+    "acronym": ""PMDB"", 
+    "name": ""PARTIDO DO MOVIMENTO DEMOCRÁTICO BRASILEIRO""
+  }
+},
+{
+  "pk": 2, 
+  "model": "politicians.politician", 
+  "fields": {
+    "party": 4, 
+    "name": ""Dilma Rousseff"
+  }
+},
+{
+  "pk": 1, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-05-03T15:13:00-03Z",
+    "link": ""http://noticias.terra.com.br/brasil/politica/mg-dilma-divide-palanque-com-aecio-neves-provavel-adversario-em-2014,305a07dcb7b6e310VgnVCM5000009ccceb0aRCRD.html"", 
+    "politician": 1, 
+    "title": ""MG: Dilma divide palanque com Aécio Neves, provável adversário em 2014""
+  }
+}
+]
