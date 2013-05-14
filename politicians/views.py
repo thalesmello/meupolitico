@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from politicians.models import Politician, News, User
 from datetime import datetime, timedelta
 
@@ -15,7 +15,13 @@ def politicians(request):
 def politician_profile(request, politician_id):
     politician = get_object_or_404(Politician, pk=politician_id)
     recent_news = politician.news_set.all().order_by('-pub_date')[:5]
-    context = {'politician': politician, 'recent_news': recent_news}
+    try:
+        username = request.session['username']
+        user = User.objects.get(username__exact=username)
+        is_favorited = user.has_favorited(politician)
+    except KeyError, User.DoesNotExist:
+        pass
+    context = {'politician': politician, 'recent_news': recent_news, 'is_favorited': is_favorited}
     return render(request, 'politicians/politician_profile.html', context)
 
 def news_search(request):
@@ -102,7 +108,7 @@ def login_user(request):
         try:
             name = request.POST['name']
             user = User.objects.get(username=name)
-        except User.DoesNotExist:
+        except KeyError, User.DoesNotExist:
             context = {'message': "Usuario inexistente"}
             return render(request, 'politicians/login.html', context)
         if user.password == request.POST['password']:
@@ -146,3 +152,36 @@ def search_results(request):
     politicians_list = Politician.objects.filter(name__contains=name)
     context = {'politicians_list': politicians_list}
     return render(request, 'politicians/politicians.html', context)
+
+def favorites(request):
+    try:
+        username = request.session['username']
+        user = User.objects.get(username__exact=username)
+    except KeyError, User.DoesNotExist:
+        return render(request, 'politicians/home.html')
+
+    politicians_list = user.favorited_politicians()
+    context = {'politicians_list': politicians_list}
+    return render(request, 'politicians/favorites.html', context)
+
+def favorite_politician(request):
+    politician_id = request.POST['politician_id']
+    original_page = request.POST['original_page']
+    try:
+        username = request.session['username']
+        user = User.objects.get(username__exact=username)
+        user.favorite_politician(politician_id)
+    except KeyError, User.DoesNotExist:
+        pass
+    return redirect(original_page)
+
+def unfavorite_politician(request):
+    politician_id = request.POST['politician_id']
+    original_page = request.POST['original_page']
+    try:
+        username = request.session['username']
+        user = User.objects.get(username__exact=username)
+        user.unfavorite_politician(politician_id)
+    except KeyError, User.DoesNotExist:
+        pass
+    return redirect(original_page)

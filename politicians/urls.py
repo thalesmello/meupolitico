@@ -31,4 +31,10 @@ urlpatterns = patterns('',
     url(r'^search_results/$', views.search_results, name='search_results'),
     url(r'^news_search/$', views.news_search, name='news_search'),
     url(r'^news_search_results/$', views.news_search_results, name='news_search_results'),
+    # ex: /favorites/
+    url(r'^favorites/$', views.favorites, name='favorites'),
+    # ex: /favorite_politician/
+    url(r'^favorite_politician/$', views.favorite_politician, name='favorite_politician'),
+    # ex: /unfavorite_politician/
+    url(r'^unfavorite_politician/$', views.unfavorite_politician, name='unfavorite_politician'),
 )
