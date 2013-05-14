@@ -21,6 +21,8 @@ class PoliticiansTest(LiveServerTestCase):
         ### and because I don't understand your fixture/json stuff
         user = User(username='felipe',password='awesomeness.py revived')
         user.save()
+        user = User(username='caio', password='caio')
+        user.save()
         ###
 
     def tearDown(self):
@@ -193,3 +195,50 @@ class PoliticiansTest(LiveServerTestCase):
 
         assert self.browser.find_element_by_xpath("//*[contains(.,'critica Secretaria da Micro')]")
         assert self.browser.find_element_by_xpath("//*[contains(.,'Dilma detalha vetos')]")
+
+    def test_user_changes_tendencioso_status(self):
+        self.browser.get(self.live_server_url+'/login/')
+        self.browser.find_element_by_id('login_username').send_keys('caio')
+        self.browser.find_element_by_id('login_password').send_keys('caio')
+        self.browser.find_element_by_id('login_button').click()
+        self.browser.get(self.live_server_url+'/news/')
+        self.browser.get(self.live_server_url+'/news/')
+        
+        ctZero = 0
+        ct = 0
+        for el in self.browser.find_elements_by_name('rating'):
+            if "Grau de tendenciosidade: 0" in el.text:
+                ctZero = ctZero + 1
+            else:
+                ct = ct + 1
+        assert ctZero == 5
+        assert ct == 0
+        button = self.browser.find_elements_by_name('upvote_button')[0]
+        button.click()
+        ctZero = 0
+        ctNeg = 0
+        ctPos = 0
+        for el in self.browser.find_elements_by_name('rating'):
+            if "Grau de tendenciosidade: 0" in el.text:
+                ctZero = ctZero + 1
+            elif "Grau de tendenciosidade: 1" in el.text:
+                ctPos = ctPos + 1
+            else:
+                ctNeg = ctNeg + 1
+        assert ctZero == 4
+        assert ctPos == 1
+        assert ctNeg == 0
+        button = self.browser.find_elements_by_name('downvote_button')[1]
+        button.click()
+        ctZero = 0
+        ctNeg = 0
+        ctPos = 0
+        for el in self.browser.find_elements_by_name('rating'):
+            if "Grau de tendenciosidade: 0" in el.text:
+                ctZero = ctZero + 1
+            elif "Grau de tendenciosidade: -1" in el.text:
+                ctNeg = ctNeg + 1
+            else:
+                ctPos = ctPos + 1
+        assert ctZero == 3 and ctNeg == 1 and ctPos == 1
+        pass

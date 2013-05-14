@@ -15,6 +15,7 @@ def politicians(request):
 def politician_profile(request, politician_id):
     politician = get_object_or_404(Politician, pk=politician_id)
     recent_news = politician.news_set.all().order_by('-pub_date')[:5]
+    is_favorited = False
     try:
         username = request.session['username']
         user = User.objects.get(username__exact=username)
@@ -76,6 +77,34 @@ def context_for_news_list(request,news_list):
     except:
         pass
 
+    news_upvoted_id = request.POST.get('upvoted',None)
+    try:
+        news_upvoted = News.objects.get(id=news_upvoted_id)
+        user.upvote_news(news_upvoted)
+    except:
+        pass
+
+    news_downvoted_id = request.POST.get('downvoted',None)
+    try:
+        news_downvoted = News.objects.get(id=news_downvoted_id)
+        user.downvote_news(news_downvoted)
+    except:
+        pass
+
+    news_undo_upvoted_id = request.POST.get('undo_upvoted',None)
+    try:
+        news_undo_upvoted = News.objects.get(id=news_undo_upvoted_id)
+        user.undo_upvote_news(news_undo_upvoted)
+    except:
+        pass
+
+    news_undo_downvoted_id = request.POST.get('undo_downvoted',None)
+    try:
+        news_undo_downvoted = News.objects.get(id=news_undo_downvoted_id)
+        user.undo_downvote_news(news_undo_downvoted)
+    except:
+        pass
+
     news_like_count = []
     for news in news_list:
         news_like_count.append(news.get_likes_count())
@@ -87,7 +116,18 @@ def context_for_news_list(request,news_list):
         else:
             news_like_status.append(None)
 
-    news_entry = zip(news_list,news_like_count,news_like_status)
+    news_rating = []
+    for news in news_list:
+        news_rating.append(news.get_news_rating())
+
+    news_vote_status = []
+    for news in news_list:
+        if user_logged_in:
+            news_vote_status.append(news.get_user_vote(user))
+        else:
+            news_vote_status.append(None)
+
+    news_entry = zip(news_list,news_like_count,news_like_status, news_rating, news_vote_status)
 
     return {'news_heading': 'Notícias Recentes', 'news_entry': news_entry}
     
