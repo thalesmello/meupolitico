@@ -59,4 +59,6 @@ class NewsModelTest(TestCase):
 
 class CrawlerTest(TestCase):
     def test_crawler(self):
+        party = Party.objects.create()
+        polit = Politician.objects.create(name='Dilma', party=party)
         add_news_to_db()
