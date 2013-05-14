@@ -8,7 +8,7 @@ class Estado(models.Model):
 
 class Cidade(models.Model):
     name = models.CharField(max_length=50)
-    cidade = models.ForeignKey(Estado)
+    estado = models.ForeignKey(Estado)
     acronym = models.CharField(max_length=55)
     def __unicode__(self):
         return self.acronym
@@ -26,15 +26,15 @@ class Party(models.Model):
 
 class Politician(models.Model):
     name = models.CharField(max_length=100)
-    foto_url = models.CharField(max_length=100)
+    foto_url = models.CharField(max_length=300)
     party = models.ForeignKey(Party)
     cargo = models.ForeignKey(Cargo)
     cidade = models.ForeignKey(Cidade)
     telefone = models.CharField(max_length=20)
-    wikipedia = models.CharField(max_length=80)
-    youtube = models.CharField(max_length=80)
-    twitter = models.CharField(max_length=80)
-    facebook = models.CharField(max_length=80)
+    wikipedia = models.CharField(max_length=300)
+    youtube = models.CharField(max_length=300)
+    twitter = models.CharField(max_length=300)
+    facebook = models.CharField(max_length=300)
     estrela1 = models.IntegerField(default=0)
     estrela2 = models.IntegerField(default=0)
     estrela3 = models.IntegerField(default=0)
@@ -43,11 +43,24 @@ class Politician(models.Model):
     def __unicode__(self):
         return self.name
 
+class Fonte(models.Model):
+    nome = models.CharField(max_length=50)
+    site = models.CharField(max_length=150)
+    estrela1 = models.IntegerField(default=0)
+    estrela2 = models.IntegerField(default=0)
+    estrela3 = models.IntegerField(default=0)
+    estrela4 = models.IntegerField(default=0)
+    estrela5 = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return self.nome
+
 class News(models.Model):
     politician = models.ForeignKey(Politician)
     title = models.CharField(max_length=200)
     link = models.URLField(max_length=200)
     pub_date = models.DateTimeField('date published')
+    fonte = models.ForeignKey(Fonte)
     
     def __unicode__(self):
         return self.title
