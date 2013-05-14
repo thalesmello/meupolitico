@@ -44,6 +44,9 @@
                         <li id="top_home"><a href="{% url 'home' %}">Home</a></li>
                         <li id="top_sobre"><a href="{% url 'home' %}">Sobre</a></li>
                         <li id="top_politicos"><a href="{% url 'politicians' %}">Políticos</a></li>
+                        {% if request.session.username != none %}
+                            <li id="top_favoritos"><a href="{% url 'favorites' %}">Favoritos</a></li>
+                        {% endif %}
                         <li id="top_noticias"><a href="{% url 'news' %}">Notícias</a></li>
                         <!-- <li id="top_busca"><a href="{% url 'news_search' %}">Busca Avançada</a></li> -->
                         <li id="top_contato"><a href="{% url 'home' %}">Contato</a></li>
