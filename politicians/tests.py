@@ -2,7 +2,6 @@
 
 from django.test import TestCase
 from django.utils import timezone
-from datetime import date
 from politicians.models import *
 from crawler import *
 
@@ -43,7 +42,7 @@ class NewsModelTest(TestCase):
         user = User.objects.create(username="Zezinho", password="senhaDoZezinho")
         party = Party.objects.create()
         polit = Politician.objects.create(party=party)
-        news = News.objects.create(title="titulo inutil", politician=polit, pub_date=date.today())
+        news = News.objects.create(title="titulo inutil", politician=polit, pub_date=timezone.now())
 
         #User will like news
         user.like_news(news)
