@@ -3,6 +3,21 @@
 {% block content %}
 <h1 id="heading_text">Meu Político - Perfil do Político</h1>
 <h2>{{ politician.name }}</h2>
+<h3>Foto: {{ politician.foto_url }}</h3>
+<h3>Partido: {{ politician.party }}</h3>
+<h3>Cargo: {{ politician.cargo }}</h3>
+<h3>Cidade: {{ politician.cidade }}</h3>
+<h3>Telefone: {{ politician.telefone }}</h3>
+<h3>Wikipedia: {{ politician.wikipedia }}</h3>
+<h3>Youtube: {{ politician.youtube }}</h3>
+<h3>Twitter: {{ politician.twitter }}</h3>
+<h3>Facebook: {{ politician.facebook }}</h3>
+<h3>5 Estrelas: {{ politician.estrela5 }}</h3>
+<h3>4 Estrelas: {{ politician.estrela4 }}</h3>
+<h3>3 Estrelas: {{ politician.estrela3 }}</h3>
+<h3>2 Estrelas: {{ politician.estrela2 }}</h3>
+<h3>1 Estrela: {{ politician.estrela1 }}</h3>
+
 <p>Partido: {{ politician.party.acronym }}</p>
 
 <h3>Notícias</h3>
