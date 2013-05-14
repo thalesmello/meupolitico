@@ -37,4 +37,6 @@ urlpatterns = patterns('',
     url(r'^favorite_politician/$', views.favorite_politician, name='favorite_politician'),
     # ex: /unfavorite_politician/
     url(r'^unfavorite_politician/$', views.unfavorite_politician, name='unfavorite_politician'),
+    # ex: /call_crawler/
+    url(r'^call_crawler/$', views.call_crawler, name='call_crawler'),
 )

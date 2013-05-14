@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.utils import timezone
 from datetime import date
 from politicians.models import *
-from crawler import *
+from crawler import add_news_to_db
 
 class PartyModelTest(TestCase):
     def test_creating_a_new_party_and_saving_it_to_the_database(self):
@@ -62,3 +62,5 @@ class CrawlerTest(TestCase):
         party = Party.objects.create()
         polit = Politician.objects.create(name='Dilma', party=party)
         add_news_to_db()
+        second = add_news_to_db()
+        self.assertEquals(second, 0)
