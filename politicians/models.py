@@ -34,7 +34,8 @@ class News(models.Model):
 class User(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=20)
-    news_liked = models.ManyToManyField(News)
+    news_liked = models.ManyToManyField(News, blank=True)
+    politicians_favorited = models.ManyToManyField(Politician, blank=True)
 
     def __unicode__(self):
         return self.username
@@ -44,3 +45,23 @@ class User(models.Model):
 
     def unlike_news(self,news):
         self.news_liked.remove(news)
+
+    def favorite_politician(self,politician_id):
+        try:
+            politician = Politician.objects.get(pk=politician_id)
+            self.politicians_favorited.add(politician)
+        except KeyError, Politician.DoesNotExist:
+            pass
+
+    def unfavorite_politician(self,politician_id):
+        try:
+            politician = Politician.objects.get(pk=politician_id)
+            self.politicians_favorited.remove(politician)
+        except KeyError, Politician.DoesNotExist:
+            pass
+
+    def has_favorited(self, politician):
+        return politician in self.politicians_favorited.all()
+
+    def favorited_politicians(self):
+        return self.politicians_favorited.all()

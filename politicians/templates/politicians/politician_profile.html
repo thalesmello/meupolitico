@@ -3,6 +3,21 @@
 {% block content %}
 <h1 id="heading_text">Meu Político - Perfil do Político</h1>
 <h2>{{ politician.name }}</h2>
+{% if not is_favorited %}
+    <form action="{% url 'favorite_politician' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="politician_id" value="{{ politician.id }}" />
+        <input type="hidden" name="original_page" value="{% url 'politician_profile' politician.id %}" />
+        <button type="submit">Favoritar</button>
+    </form>
+{% else %}
+    <form action="{% url 'unfavorite_politician' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="politician_id" value="{{ politician.id }}" />
+        <input type="hidden" name="original_page" value="{% url 'politician_profile' politician.id %}" />
+        <button type="submit">Desfavoritar</button>
+    </form>
+{% endif %}
 <p>Partido: {{ politician.party.acronym }}</p>
 
 <h3>Notícias</h3>

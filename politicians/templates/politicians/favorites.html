@@ -1,0 +1,39 @@
+{% extends "politicians/base.html" %}
+
+{% block content %}
+<h1 id="heading_text">Meu Político - Políticos Favoritos</h1>
+
+{% if politicians_list %}
+    <ul>
+    {% for politician in politicians_list %}
+        {% if forloop.counter0|divisibleby:"3" %}
+            <div class="row">
+        {% endif %}
+
+        <div class="span4">
+            <h3 class="title_text"><a href="{% url 'politician_profile' politician.id %}">{{ politician.name }}</a></h3>
+            <form action="{% url 'unfavorite_politician' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="politician_id" value="{{ politician.id }}" />
+                <input type="hidden" name="original_page" value="{% url 'favorites' %}" />
+                <button type="submit">Desfavoritar</button>
+            </form>
+        </div>
+
+        {% if forloop.counter|divisibleby:"3" %}
+            </div>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nenhum político favoritado.</p>
+{% endif %}
+{% endblock %}
+
+{% block page_js %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#top_favoritos').addClass('active');
+        });
+    </script>
+{% endblock %}
