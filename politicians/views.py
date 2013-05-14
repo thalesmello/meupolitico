@@ -15,6 +15,7 @@ def politicians(request):
 def politician_profile(request, politician_id):
     politician = get_object_or_404(Politician, pk=politician_id)
     recent_news = politician.news_set.all().order_by('-pub_date')[:5]
+    is_favorited = False
     try:
         username = request.session['username']
         user = User.objects.get(username__exact=username)
