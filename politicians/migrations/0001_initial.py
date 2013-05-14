@@ -50,6 +50,30 @@ class Migration(SchemaMigration):
         ))
         db.create_unique(u'politicians_user_news_liked', ['user_id', 'news_id'])
 
+        # Adding M2M table for field politicians_favorited on 'User'
+        db.create_table(u'politicians_user_politicians_favorited', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('user', models.ForeignKey(orm[u'politicians.user'], null=False)),
+            ('politician', models.ForeignKey(orm[u'politicians.politician'], null=False))
+        ))
+        db.create_unique(u'politicians_user_politicians_favorited', ['user_id', 'politician_id'])
+
+        # Adding M2M table for field news_upvoted on 'User'
+        db.create_table(u'politicians_user_news_upvoted', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('user', models.ForeignKey(orm[u'politicians.user'], null=False)),
+            ('news', models.ForeignKey(orm[u'politicians.news'], null=False))
+        ))
+        db.create_unique(u'politicians_user_news_upvoted', ['user_id', 'news_id'])
+
+        # Adding M2M table for field news_downvoted on 'User'
+        db.create_table(u'politicians_user_news_downvoted', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('user', models.ForeignKey(orm[u'politicians.user'], null=False)),
+            ('news', models.ForeignKey(orm[u'politicians.news'], null=False))
+        ))
+        db.create_unique(u'politicians_user_news_downvoted', ['user_id', 'news_id'])
+
 
     def backwards(self, orm):
         # Deleting model 'Party'
@@ -66,6 +90,15 @@ class Migration(SchemaMigration):
 
         # Removing M2M table for field news_liked on 'User'
         db.delete_table('politicians_user_news_liked')
+
+        # Removing M2M table for field politicians_favorited on 'User'
+        db.delete_table('politicians_user_politicians_favorited')
+
+        # Removing M2M table for field news_upvoted on 'User'
+        db.delete_table('politicians_user_news_upvoted')
+
+        # Removing M2M table for field news_downvoted on 'User'
+        db.delete_table('politicians_user_news_downvoted')
 
 
     models = {
@@ -92,8 +125,11 @@ class Migration(SchemaMigration):
         u'politicians.user': {
             'Meta': {'object_name': 'User'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'news_liked': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['politicians.News']", 'symmetrical': 'False'}),
+            'news_downvoted': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'news_downvoted'", 'blank': 'True', 'to': u"orm['politicians.News']"}),
+            'news_liked': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'news_liked'", 'blank': 'True', 'to': u"orm['politicians.News']"}),
+            'news_upvoted': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'news_upvoted'", 'blank': 'True', 'to': u"orm['politicians.News']"}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
+            'politicians_favorited': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['politicians.Politician']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         }
     }

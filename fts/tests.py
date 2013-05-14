@@ -18,11 +18,7 @@ class PoliticiansTest(LiveServerTestCase):
         super(PoliticiansTest, cls).setUpClass()
 
     def setUp(self):
-        ### Felipe: inserting the user directly because there's no registration
-        ### and because I don't understand your fixture/json stuff
-        user = User(username='felipe',password='awesomeness.py revived')
-        user.save()
-        ###
+        pass
 
     def tearDown(self):
         pass
@@ -108,7 +104,7 @@ class PoliticiansTest(LiveServerTestCase):
     def test_can_login(self):
         self.browser.get(self.live_server_url+'/login/')
         self.browser.find_element_by_id('login_username').send_keys('felipe')
-        self.browser.find_element_by_id('login_password').send_keys('awesomeness.py revived')
+        self.browser.find_element_by_id('login_password').send_keys('felipe')
         self.browser.find_element_by_id('login_button').click()
         el = self.browser.find_element_by_id('login_header')
         if not el.is_displayed():
@@ -134,7 +130,7 @@ class PoliticiansTest(LiveServerTestCase):
     def test_user_sees_like_buttons(self):
         self.browser.get(self.live_server_url+'/login/')
         self.browser.find_element_by_id('login_username').send_keys('felipe')
-        self.browser.find_element_by_id('login_password').send_keys('awesomeness.py revived')
+        self.browser.find_element_by_id('login_password').send_keys('felipe')
         self.browser.find_element_by_id('login_button').click()
         self.browser.get(self.live_server_url+'/news/')
         assert len(self.browser.find_elements_by_name('like_button'))==5
@@ -147,7 +143,7 @@ class PoliticiansTest(LiveServerTestCase):
     def test_user_changes_like_status(self):
         self.browser.get(self.live_server_url+'/login/')
         self.browser.find_element_by_id('login_username').send_keys('felipe')
-        self.browser.find_element_by_id('login_password').send_keys('awesomeness.py revived')
+        self.browser.find_element_by_id('login_password').send_keys('felipe')
         self.browser.find_element_by_id('login_button').click()
         self.browser.get(self.live_server_url+'/news/')
         self.browser.get(self.live_server_url+'/news/')
@@ -207,3 +203,50 @@ class PoliticiansTest(LiveServerTestCase):
         body = self.browser.find_element_by_tag_name('body')
         self.assertIn(u'critica Secretaria da Micro', body.text)
         self.assertIn(u'Dilma detalha vetos', body.text)
+
+    def test_user_changes_tendencioso_status(self):
+        self.browser.get(self.live_server_url+'/login/')
+        self.browser.find_element_by_id('login_username').send_keys('caio')
+        self.browser.find_element_by_id('login_password').send_keys('caio')
+        self.browser.find_element_by_id('login_button').click()
+        self.browser.get(self.live_server_url+'/news/')
+        self.browser.get(self.live_server_url+'/news/')
+        
+        ctZero = 0
+        ct = 0
+        for el in self.browser.find_elements_by_name('rating'):
+            if "Grau de tendenciosidade: 0" in el.text:
+                ctZero = ctZero + 1
+            else:
+                ct = ct + 1
+        assert ctZero == 5
+        assert ct == 0
+        button = self.browser.find_elements_by_name('upvote_button')[0]
+        button.click()
+        ctZero = 0
+        ctNeg = 0
+        ctPos = 0
+        for el in self.browser.find_elements_by_name('rating'):
+            if "Grau de tendenciosidade: 0" in el.text:
+                ctZero = ctZero + 1
+            elif "Grau de tendenciosidade: 1" in el.text:
+                ctPos = ctPos + 1
+            else:
+                ctNeg = ctNeg + 1
+        assert ctZero == 4
+        assert ctPos == 1
+        assert ctNeg == 0
+        button = self.browser.find_elements_by_name('downvote_button')[1]
+        button.click()
+        ctZero = 0
+        ctNeg = 0
+        ctPos = 0
+        for el in self.browser.find_elements_by_name('rating'):
+            if "Grau de tendenciosidade: 0" in el.text:
+                ctZero = ctZero + 1
+            elif "Grau de tendenciosidade: -1" in el.text:
+                ctNeg = ctNeg + 1
+            else:
+                ctPos = ctPos + 1
+        assert ctZero == 3 and ctNeg == 1 and ctPos == 1
+        pass
