@@ -3,8 +3,9 @@ from dateutil import parser
 from politicians.models import Politician, News
 
 class FeedCrawler(object):
-    def __init__(self, url):
+    def __init__(self, url, source):
         self.feeds = feedparser.parse(url)['entries']
+        self.source = source
 
     def relevant_field(self, fd):
         return fd['summary']
@@ -16,7 +17,8 @@ class FeedCrawler(object):
                 add_count += 1
                 News.objects.create(politician=politician, title=entry['title'],
                     pub_date=parser.parse(entry['published']),
-                    link=entry['link']
+                    link=entry['link'],
+                    source=self.source
                 )
         return add_count
 
@@ -36,17 +38,24 @@ def add_news_to_db():
             'http://brasileconomico.ig.com.br/rss/politica',
             'http://blogs.estadao.com.br/radar-politico/feed/']
 
+    sources = ['Folha de Sao Paulo',
+               'Terra Noticias',
+               'Yahoo Noticias',
+               'G1',
+               'Brasil Economico',
+               'Estadao']
+
     politicians = Politician.objects.all()
     add_count = 0
     current_news_titles = {}
     for politician in politicians:
         current_news_titles[politician.name] = map(lambda nw: nw.title, politician.news_set.all())
 
-    for url in urls:
+    for url, source in zip(urls,sources):
         if 'estadao' in url:
-            feed_crawler = FeedCrawlerEstadao(url)
+            feed_crawler = FeedCrawlerEstadao(url, source)
         else:
-            feed_crawler = FeedCrawler(url)
+            feed_crawler = FeedCrawler(url, source)
         for politician in politicians:
             add_count+=feed_crawler.commit_to_db(politician, current_news_titles[politician.name])
 
