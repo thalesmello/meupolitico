@@ -3,23 +3,29 @@ from dateutil import parser
 from politicians.models import Politician, News
 
 class FeedCrawler(object):
-    def __init__(self, url, source):
+    def __init__(self, url, source, politicians, current_news_titles):
         self.feeds = feedparser.parse(url)['entries']
         self.source = source
+        self.politicians = politicians
+        self.news_titles = current_news_titles
 
     def relevant_field(self, fd):
         return fd['summary']
 
-    def commit_to_db(self, politician, current_news_titles):
+    def commit_to_db(self):
         add_count = 0
-        for entry in filter(lambda fd: politician.name in self.relevant_field(fd), self.feeds):
-            if not entry['title'] in current_news_titles:
-                add_count += 1
-                News.objects.create(politician=politician, title=entry['title'],
-                    pub_date=parser.parse(entry['published']),
-                    link=entry['link'],
-                    source=self.source
-                )
+        for entry in self.feeds:
+            if not entry['title'] in self.news_titles:
+                polits = filter(lambda p: p.name in self.relevant_field(entry), self.politicians)
+                if polits:
+                    add_count += 1
+                    news = News.objects.create(title=entry['title'],
+                        pub_date=parser.parse(entry['published']),
+                        link=entry['link'],
+                        source=self.source
+                    )
+                    for politician in polits:
+                        politician.add_relevant_news(news)
         return add_count
 
 class FeedCrawlerEstadao(FeedCrawler):
@@ -47,16 +53,19 @@ def add_news_to_db():
 
     politicians = Politician.objects.all()
     add_count = 0
-    current_news_titles = {}
+    current_news_titles = []
     for politician in politicians:
-        current_news_titles[politician.name] = map(lambda nw: nw.title, politician.news_set.all())
+        current_news_titles.append(
+            map(lambda nw: nw.title, politician.relevant_news.all()))
+
+    # A hacker's way of flattening a list of lists (of scrum of scrums)
+    news_titles = [item for sublist in current_news_titles for item in sublist]
 
     for url, source in zip(urls,sources):
         if 'estadao' in url:
-            feed_crawler = FeedCrawlerEstadao(url, source)
+            feed_crawler = FeedCrawlerEstadao(url, source, politicians, news_titles)
         else:
-            feed_crawler = FeedCrawler(url, source)
-        for politician in politicians:
-            add_count+=feed_crawler.commit_to_db(politician, current_news_titles[politician.name])
+            feed_crawler = FeedCrawler(url, source, politicians, news_titles)
+        add_count += feed_crawler.commit_to_db()
 
     return add_count

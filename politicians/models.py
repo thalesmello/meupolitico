@@ -6,14 +6,8 @@ class Party(models.Model):
     def __unicode__(self):
         return self.acronym
 
-class Politician(models.Model):
-    name = models.CharField(max_length=100)
-    party = models.ForeignKey(Party)
-    def __unicode__(self):
-        return self.name
 
 class News(models.Model):
-    politician = models.ForeignKey(Politician)
     title = models.CharField(max_length=200)
     link = models.URLField(max_length=200)
     pub_date = models.DateTimeField('date published')
@@ -42,6 +36,26 @@ class News(models.Model):
             return -1
         else:
             return 0
+
+    def get_all_politicians(self):
+        return self.relevant_news.all()
+
+
+class Politician(models.Model):
+    name = models.CharField(max_length=100)
+    party = models.ForeignKey(Party)
+    relevant_news = models.ManyToManyField(News, blank=True, related_name="relevant_news")
+    def __unicode__(self):
+        return self.name
+    def get_relevant_news(self):
+        return self.relevant_news.all()
+    def is_relevant_news(self, news):
+        return news in self.get_relevant_news()
+    def add_relevant_news(self, news):
+        self.relevant_news.add(news)
+    def remove_relevant_news(self, news):
+        self.relevant_news.remove(news)
+
 
 class User(models.Model):
     username = models.CharField(max_length=50)

@@ -40,9 +40,7 @@ class NewsModelTest(TestCase):
 
     def test_user_likes_news(self):
         user = User.objects.create(username="Zezinho", password="senhaDoZezinho")
-        party = Party.objects.create()
-        polit = Politician.objects.create(party=party)
-        news = News.objects.create(title="titulo inutil", politician=polit, pub_date=timezone.now())
+        news = News.objects.create(title="titulo inutil", pub_date=timezone.now())
 
         #User will like news
         user.like_news(news)

@@ -6,13 +6,16 @@
 {% if news_entry %}
     <div class="row">
     <div class="noticia-wrapper span10 offset1">
-    {% for news, like_count, like_status, rating, vote_status in news_entry %}
+    {% for news, like_count, like_status, rating, vote_status, polit_set in news_entry %}
 
         <div class="noticia">
             <h3 class="news_title"><a href="{{ news.link}}">{{ news.title }}</a> </h3>
             <p class="news_detail">
-            - <a href="{% url 'politician_profile' news.politician.id %}">{{ news.politician.name }}</a>
-                 - {{news.pub_date}}
+            - {% for polit in polit_set %}
+                <a href="{% url 'politician_profile' polit.id %}">{{ polit.name }}</a> -
+            {% endfor %}
+                 {{news.pub_date}}
+                 {{news.source}}
             </p>
         </div>
 
