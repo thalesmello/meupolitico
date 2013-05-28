@@ -58,7 +58,9 @@
 			{% endif %}
 			</form>
 		{% endif %}
-		
+		{% load comments %}
+		{% get_comment_count for politicians.news news.id as comment_count %}
+		<a href="{% url 'news_page' news.id %}">Ver comentários ({{ comment_count }})</a>
         {% if not forloop.last %}
             <hr class="news">
         {% endif %}

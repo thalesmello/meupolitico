@@ -108,3 +108,4 @@ class User(models.Model):
 
     def favorited_politicians(self):
         return self.politicians_favorited.all()
+
