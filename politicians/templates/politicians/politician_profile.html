@@ -3,7 +3,9 @@
 {% block content %}
 ﻿{% load staticfiles %}
 <div class="esq"> 
+{% if politician.foto_url %}    
 <a><img id="foto" src="{{ politician.foto_url }}" alt="{{ politician.name }}"></a>     
+{% endif %}
 <h2>{{ politician.name }}</h2>
 <p>Partido: {{ politician.party }}</p>
 <p>Cargo: {{ politician.cargo }}</p>
