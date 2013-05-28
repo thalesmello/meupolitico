@@ -6,7 +6,7 @@
 {% if news_entry %}
     <div class="row">
     <div class="noticia-wrapper span10 offset1">
-    {% for news, like_count, like_status, rating, vote_status in news_entry %}
+    {% for news, like_count, like_status in news_entry %}
 
         <div class="noticia">
             <h3 class="news_title"><a href="{{ news.link}}">{{ news.title }}</a> </h3>
@@ -34,31 +34,6 @@
             </form>
         {% endif %}
 
-		<p name="rating">Grau de tendenciosidade: {{ rating }}</p>
-		{% if vote_status == None %}
-		{% else %}
-			<form action="{% url 'news' %}" method="post">
-			{% csrf_token %}
-			{% if vote_status == 1 %}
-				<input type="hidden" name="undo_upvoted" value="{{ news.id }}"/>
-                <input type="submit" name="undoupvote_button" value="Desmarcar como tendenciosa"/>
-			{% else %}
-				<input type="hidden" name="upvoted" value="{{ news.id }}"/>
-                <input type="submit" name="upvote_button" value="Marcar como tendenciosa"/>
-			{% endif %}
-			</form>
-			<form action="{% url 'news' %}" method="post">
-			{% csrf_token %}
-			{% if vote_status == -1 %}
-				<input type="hidden" name="undo_downvoted" value="{{ news.id }}"/>
-                <input type="submit" name="undodonwvote_button" value="Desmarcar como objetiva"/>
-			{% else %}
-                <input type="hidden" name="downvoted" value="{{ news.id }}"/>
-                <input type="submit" name="downvote_button" value="Marcar como objetiva"/>
-			{% endif %}
-			</form>
-		{% endif %}
-		
         {% if not forloop.last %}
             <hr class="news">
         {% endif %}

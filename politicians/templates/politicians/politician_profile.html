@@ -1,30 +1,35 @@
 {% extends "politicians/base.html" %}
 
 {% block content %}
-<h1 id="heading_text">Meu Político - Perfil do Político</h1>
+﻿{% load staticfiles %}
+<div class="esq"> 
+<a><img id="foto" src="{{ politician.foto_url }}" alt="{{ politician.name }}"></a>     
 <h2>{{ politician.name }}</h2>
-{% if request.session.username != none %}
-    {% if not is_favorited %}
-        <form action="{% url 'favorite_politician' %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="politician_id" value="{{ politician.id }}" />
-            <input type="hidden" name="original_page" value="{% url 'politician_profile' politician.id %}" />
-            <button type="submit">Favoritar</button>
-        </form>
-    {% else %}
-        <form action="{% url 'unfavorite_politician' %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="politician_id" value="{{ politician.id }}" />
-            <input type="hidden" name="original_page" value="{% url 'politician_profile' politician.id %}" />
-            <button type="submit">Desfavoritar</button>
-        </form>
-    {% endif %}
-{% endif %}
-<p>Partido: {{ politician.party.acronym }}</p>
+<p>Partido: {{ politician.party }}</p>
+<p>Cargo: {{ politician.cargo }}</p>
+<p>Cidade : {{ politician.cidade }}</p>
+<div id="contact_links">
+<a href="{{ politician.facebook }}"><img class="urlimg" id="facebook" src="{% static 'politicians/images/facebook.png' %}" alt="facebook"></a>     
+<a href="{{ politician.twitter }}"><img class="urlimg" id="twitter" src="{% static 'politicians/images/twitter.png' %}" alt="twitter"></a>     
+<a href="{{ politician.youtube }}"><img class="urlimg" id="youtube" src="{% static 'politicians/images/youtube.png' %}" alt="youtube"></a>     
+<a href="{{ politician.wikipedia }}"><img class="urlimg" id="wikipedia" src="{% static 'politicians/images/wikipedia.png' %}" alt="wikipedia"></a>
+</div>
+<p>Review</p>
+<p>5 Estrelas: {{ politician.estrela5 }}</p>
+<p>4 Estrelas: {{ politician.estrela4 }}</p>
+<p>3 Estrelas: {{ politician.estrela3 }}</p>
+<p>2 Estrelas: {{ politician.estrela2 }}</p>
+<p>1 Estrela: {{ politician.estrela1 }}</p>
 
-<h3>Notícias</h3>
+</div>
+
+<div class="dir">
+
+
+<div class="row">
+<h4>Noticias relacionadas ao politico</h3>
 {% if recent_news %}
-	<div class="row">
+	
     <div class="noticia-wrapper span10 offset1">
     {% for news in recent_news %}
     	    <div class="noticia">
@@ -38,10 +43,12 @@
         {% endif %}
     {% endfor %}
     </div>
-    </div>
+    
 {% else %}
     <p>Nenhuma notícia recente.</p>
 {% endif %}
+</div>
+</div>
 
 {% endblock %}
 

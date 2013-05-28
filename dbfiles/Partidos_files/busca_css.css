@@ -1,0 +1,347 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*Configuração do leiaute do resultado de busca*/
+.busca_avancada{
+    position: relative;
+    width: 985px;
+}
+
+#region-content #searchform {
+    margin-top:25px !important;
+    display:block !important;
+    margin-top:8px !important;
+}
+#region-content #searchform input.searchPage {
+    font-size:75% !important;
+    padding:3px 5px !important;
+}
+#region-content #searchform .searchButton {
+    font-size:75% !important;
+    /*padding:1px 1px 1px 19px !important;*/
+    padding:2px 1px 2px 0 !important;
+    margin-left:7px !important;
+}
+#searchform .discreet {
+    font-size:75% !important;
+}
+.discreet .link-feed {
+    font-size:75% !important;
+}
+.searchResults {
+    font-size: 75% !important;
+}
+.searchResults img {
+    margin-right:7px !important;
+    vertical-align:sub !important;
+    display:none !important;
+}
+.searchResults dd {
+    font-size:90% !important;
+    display:block !important;
+    margin-bottom:20px !important;
+    margin-left: 15px !important;
+}
+
+#bandeirasNoticias {
+    margin-top:30px !important;
+}
+#bandeirasNoticias img  {
+    border: 1px solid #000 !important;
+}
+
+TABLE.plain, TABLE.plain TD, TABLE.plain TH {
+    border:1px solid #666 !important;
+}
+
+
+/*estilo novo formulario*/
+
+input.searchPage{
+    background: #FFF !important;
+    border: 1px solid #999 !important;
+    width: 450px !important;
+    height: 17px !important;
+}
+
+#searchform .searchButton{
+    width:70px !important;
+    padding: 0px !important;
+    height: 24px !important;
+}
+
+#searchform a{
+    color: #000 !important;	
+    text-decoration:underline !important;
+}
+.searchResults a{
+    color: #00F !important;
+    text-decoration:underline !important;
+}
+.searchResults a:hover{
+    text-decoration: none !important;
+}
+
+.listingBar{
+    text-align: center !important;
+    margin-top: 20px !important;
+    font-size: 75% !important;
+    text-transform: none !important;
+    *border: none !important;
+    *background: none !important;
+}
+
+.listingBar a{
+    color: #00F !important;
+    font-size: 12px !important;
+}
+
+.searchResults{
+    margin-left:30px !important;
+}
+
+.searchResults dd {
+    margin-bottom: 15px !important;
+}
+
+form.searchPage {
+    margin-left: 30px !important;
+}
+
+#searchform p.discreet{
+    *font-size: 70% !important;
+}
+
+#searchform p.discreet a:hover{
+   text-decoration: none !important;
+}
+
+.documentFirstHeading{
+    margin-left: 30px;	
+    font-size: 125% !important;
+    *font-size: 110% !important;
+    *border-bottom: none !important;
+}
+
+.link-feed{
+    margin-left: 30px !important;
+    padding-left: 50px !important;
+    background: url(../img/rss.png) no-repeat left center !important;
+    color: #999 !important;
+}
+
+.link-feed a:hover{
+    text-decoration: underline !important;
+}
+
+dl.searchResults{
+    *font-size: 75% !important;	
+}
+.documentContent .link-feed{
+    *font-size: 65% !important;
+}
+.documentContent P A{
+    *border-bottom: none !important;
+}
+.documentContent P A:hover{
+    *text-decoration: underline !important;
+}
+
+/*correções ie7*/
+DL.searchResults DT{
+    *font-size: 90% !important;
+    font-weight: normal;
+}
+span.highlightedSearchTerm{
+    font-weight: bold !important;
+}
+INPUT.searchPage{
+    *font-size: 75% !important; 
+}
+FORM.searchPage{
+    *text-align: left !important; 
+}
+.listingBar SPAN.next{
+    float: none !important;
+}
+
+/********************/
+
+#region-content #searchform {
+    margin-top:25px !important;
+    display:block !important;
+    margin-top:8px !important;
+}
+#searchform a{
+    color: #000 !important;	
+    text-decoration:underline !important;
+}
+.documentFirstHeading_busca{
+    margin-left: 30px;	
+    font-size: 125% !important;
+    *font-size: 110% !important;
+    *border-bottom: none !important;
+}
+#desc_busca_avancada{
+    position:relative;
+    float:right;
+    width:354px;
+    background-color:#EFEFEF;
+    border: solid 1px #CCC;
+    padding:20px 25px 20px 25px;
+    margin-top:35px;	
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size:9pt !important;
+    margin-right: 10px;
+    _margin-right: 10px;
+    *margin-right: 10px;
+    margin-right /*\**/ : 10px\9
+}
+
+.forms_search{
+    float: left;
+    width: 565px;
+}
+#form_busca_avancada{
+        position:relative;
+        float:left;
+        width:507px;
+        margin-top:-3px;
+        *margin-top:-20px;
+        _margin-top:-20px;
+}
+#form_busca_avancada input{
+        padding:3px;
+        font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size:12px;
+}
+#form_busca_avancada label{
+        font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size:12px !important;
+        color:#666;
+		font-weight:bold;
+}
+#form_busca_avancada label b{
+	font-size:12px !important;
+}
+#form_busca_avancada .col2{
+float: left; margin-right: 9em;
+} 
+#form_busca_avancada .field_ordem, .field_tipos, .field_dtini, .field_dtfim{
+    float: left;
+    width: 240px;
+}
+#form_busca_avancada .field_dtini{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+#form_busca_avancada .field_assunto{
+	margin-top: 220px;
+}
+#form_busca_avancada .field_caixa, .field_caixa2, .field_caixa3{
+        border:solid 1px #ccc;
+        border-left:solid 10px #F3F3F3;
+        padding:5px;
+        max-width:434px;		
+        font-size:12pt;
+}
+#form_busca_avancada .field_termos{
+        width: 465px;
+        font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size:12pt !important;
+        color:#666;
+}
+#form_busca_avancada .field_caixa{
+        width:189px;
+        font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size:12px;
+        color:#666;
+        margin-right: 20px;
+}
+#form_busca_avancada .field_caixa label{		
+        font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size:12px;
+        color:#666;
+		font-weight:normal;
+}
+#form_busca_avancada .formHelp{	
+        font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size:12px;
+        color:#666;
+}
+#form_busca_avancada .field_box2{
+        font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+        color:#666;
+        margin-bottom: 12px;
+}
+#form_busca_avancada .field_box3{
+        font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+        color:#666;
+        margin-top: 155px;
+}
+#form_busca_avancada .field_box3 label{
+		font-weight: normal;
+}
+#form_busca_avancada .field_caixa, .field_caixa2{
+        border:solid 1px #ccc;
+        border-left:solid 10px #F3F3F3;
+        padding:5px;
+        max-width:434px;
+}
+#form_busca_avancada .field_caixa{
+        width:189px;
+        font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size:12pt;
+        color:#666;	
+}
+#form_busca_avancada .field_caixa2{
+        min-height:80px;
+}
+#form_busca_avancada .field_select_subject{
+	float:left;
+}
+#form_busca_avancada .field_select_subject label{
+	font-weight:normal;
+}
+#form_busca_avancada option, select{
+        font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size:12px;
+        color:#666;
+}
+#form_busca_avancada input{	
+        color:#666;		
+}
+#form_busca_avancada #btn_buscar input{
+        background-color:#F3F3F3;
+        border:solid 1px #ccc;
+        padding:5px;
+        width:100px;
+        color:#666;
+        font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size:14px;
+        float:right;
+        margin-right:53px;
+        *margin-right:43px;
+        _margin-right:43px;
+}
+#form_busca_avancada .optionsToggle {
+    background-color: transparent;
+    border: 1px none #8CACBB;
+    color: Black;
+    font-size: 12px;
+    font-weight: normal !important;
+}
+#form_busca_avancada .label-tribunal{
+	text-transform:uppercase;
+	font-size: 12px !important;
+	font-weight: normal !important;
+}
+#form_busca_avancada .label-tribunal-toogle{
+	text-transform:none;
+	font-size: 12px !important;
+	font-weight: normal !important;
+}
+#form_busca_avancada .col1{float: right; margin-left: 2em;}
+#form_busca_avancada .plone_jscalendar img{display: none;}
+#form_busca_avancada .input-tipo{margin:3px !important;}
+

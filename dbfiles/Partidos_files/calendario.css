@@ -1,0 +1,86 @@
+.dayPopup {
+    background-color: #FFFFE1;
+    border: 1px solid Black;
+    padding: 0.2em;
+    position: absolute;
+    visibility: hidden;
+    width: 12em;
+    z-index: 2;
+}
+.date {
+    font-weight: bold;
+}
+.portletCalendar {
+    border: 1px solid #FFFFFF;
+    font-size: 80%;
+    margin: 1px 0 1em;
+    width: 91%;
+}
+.portletCalendar dt {
+    background-color: #EDEAEC;
+    color: #818181;
+    font-family: verdana;
+    font-size: 80%;
+    font-weight: bold;
+    line-height: 1.6em;
+    padding: 3px 0;
+    text-align: center;
+    border:none !important;
+}
+.portletCalendar dd {
+    margin: 0;
+    padding: 0;
+}
+.portletCalendar a {
+    color: #5F5F5F;
+    text-decoration: none;
+}
+.portletCalendar a:hover {
+    text-decoration: none;
+}
+.ploneCalendar {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+.ploneCalendar td {
+    background-color: transparent;
+    padding: 2px;
+    text-align: center;
+    width: 14%;
+}
+.ploneCalendar .weekdays th {
+    background-color: #F2F2F2;
+    border-color: #4C4C4C;
+    border-style: solid none;
+    border-width: 0;
+    color: #434343;
+    font-family: verdana;
+    font-size: 80%;
+    font-weight: normal;
+    padding: 2px;
+    text-align: center;
+}
+.ploneCalendar .event {
+    background-color: #FFFFFF;
+    font-size: 90%;
+    font-weight: normal;
+}
+.ploneCalendar .todayevent {
+    border: 1px solid #7F7F7F;
+    font-weight: bold;
+}
+.ploneCalendar .todaynoevent {
+    border: 2px solid #7F7F7F;
+    border-collapse: collapse;
+}
+.hiddenStructure {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    display: block;
+    height: 1px;
+    margin: -1px 0 0 -1px;
+    overflow: hidden;
+    padding: 0;
+    width: 1px;
+}

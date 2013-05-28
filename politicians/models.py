@@ -7,10 +7,35 @@ class Party(models.Model):
         return self.acronym
 
 class Politician(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, default='')    
     party = models.ForeignKey(Party)
+    foto_url = models.CharField(max_length=300, default='')
+    cargo = models.CharField(max_length=50, default='')
+    cidade = models.CharField(max_length=50, default='')
+    telefone = models.CharField(max_length=20, default='')
+    wikipedia = models.CharField(max_length=300, default='')
+    youtube = models.CharField(max_length=300, default='')
+    twitter = models.CharField(max_length=300, default='')
+    facebook = models.CharField(max_length=300, default='')
+    estrela1 = models.IntegerField(default=0)
+    estrela2 = models.IntegerField(default=0)
+    estrela3 = models.IntegerField(default=0)
+    estrela4 = models.IntegerField(default=0)
+    estrela5 = models.IntegerField(default=0)
     def __unicode__(self):
         return self.name
+
+class Fonte(models.Model):
+    nome = models.CharField(max_length=50)
+    site = models.CharField(max_length=150)
+    estrela1 = models.IntegerField(default=0)
+    estrela2 = models.IntegerField(default=0)
+    estrela3 = models.IntegerField(default=0)
+    estrela4 = models.IntegerField(default=0)
+    estrela5 = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return self.nome
 
 class News(models.Model):
     politician = models.ForeignKey(Politician)
