@@ -66,7 +66,8 @@
 		{% endif %}
 		{% get_comment_list for politicians.news news.id as comment_list %}
 		{% for comment in comment_list %}
-			<p>Autor: {{ comment.user_name }} | {{ comment.submit_date }}</p>
+			<p>Autor: {{ comment.user_name }} | {{ comment.submit_date }} | <a href="/comments/flag/{{ comment.id }}/">
+				Denunciar comentário ofensivo</a></p>
 			<p>Comentário: {{ comment.comment }}</p>
 		{% endfor %}
 	{% endif %}
