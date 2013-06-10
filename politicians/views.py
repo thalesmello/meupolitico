@@ -133,9 +133,10 @@ def context_for_news_list(request,news_list):
     news_politician_set = []
     for news in news_list:
         news_politician_set.append(news.get_all_politicians())
-
+        
+    num_news_list = range(len(news_list))
     news_entry = zip(news_list,news_like_count,news_like_status,
-                    news_rating,news_vote_status,news_politician_set)
+                    news_rating,news_vote_status,news_politician_set,num_news_list)
 
     return {'news_heading': 'Notícias Recentes', 'news_entry': news_entry}
 

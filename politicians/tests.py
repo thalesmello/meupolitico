@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from django.test import TestCase
 from django.utils import timezone
@@ -53,6 +53,17 @@ class NewsModelTest(TestCase):
         count_likes = news.get_likes_count()
         self.assertEquals(count_likes, 1)
 
+    def test_admin_sets_bias(self):
+        party = Party.objects.create()
+        polit = Politician.objects.create(party=party)
+        news = News.objects.create(title="titulo inutil", politician=polit, pub_date=date.today())
+        
+        # Default bias value is False
+        self.assertFalse(news.bias)
+
+        # Setting value to True
+        news.bias = True
+        self.assertTrue(news.bias)
 
 class CrawlerTest(TestCase):
     def test_crawler(self):

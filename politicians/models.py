@@ -42,6 +42,7 @@ class News(models.Model):
     link = models.URLField(max_length=200)
     pub_date = models.DateTimeField('date published')
     source = models.CharField(max_length=200)
+    bias = models.BooleanField(default=False)
     
     def __unicode__(self):
         return self.title
