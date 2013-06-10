@@ -1,5 +1,23 @@
 from django.db import models
 
+class Estado(models.Model):
+    name = models.CharField(max_length=30)
+    acronym = models.CharField(max_length=2)
+    def __unicode__(self):
+        return self.acronym
+
+class Cidade(models.Model):
+    name = models.CharField(max_length=50)
+    estado = models.ForeignKey(Estado)
+    acronym = models.CharField(max_length=55)
+    def __unicode__(self):
+        return self.acronym
+
+class Cargo(models.Model):
+    name = models.CharField(max_length=100)
+    def __unicode__(self):
+        return self.name
+
 class Party(models.Model):
     name = models.CharField(max_length=100)
     acronym = models.CharField(max_length=10)
@@ -43,6 +61,7 @@ class News(models.Model):
     pub_date = models.DateTimeField('date published')
     source = models.CharField(max_length=200)
     bias = models.BooleanField(default=False)
+    fonte = models.ForeignKey(Fonte)
     
     def __unicode__(self):
         return self.title

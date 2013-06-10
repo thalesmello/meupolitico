@@ -2,6 +2,9 @@ from django.contrib import admin
 from politicians.models import *
 from django.contrib.admin.sites import NotRegistered
 
+admin.site.register(Estado)
+admin.site.register(Cidade)
+admin.site.register(Cargo)
 admin.site.register(Party)
 admin.site.register(Politician)
 admin.site.register(News)
@@ -40,3 +43,5 @@ class MyCommentsAdmin(CommentsAdmin):
     list_filter = ('submit_date', 'site', 'is_public', 'is_removed', 'flags__flag')
 
 admin.site.register(Comment, MyCommentsAdmin)
+admin.site.register(Fonte)
+# admin.site.register(User)

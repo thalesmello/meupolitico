@@ -72,3 +72,4 @@ class CrawlerTest(TestCase):
         add_news_to_db()
         second = add_news_to_db()
         self.assertEquals(second, 0)
+
