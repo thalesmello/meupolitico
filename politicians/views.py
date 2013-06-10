@@ -237,3 +237,26 @@ def unfavorite_politician(request):
 def call_crawler(request):
     news_added = add_news_to_db()
     return HttpResponse("{} news were added to DB".format(news_added))
+
+def news_page(request, news_id):
+    news = get_object_or_404(News, pk=news_id)
+    like_status = None
+    vote_status = None
+    try:
+        username = request.session['username']
+        user = User.objects.get(username__exact=username)
+        user_logged_in = True
+    except KeyError, User.DoesNotExist:
+        user_logged_in = False
+    rating = news.get_news_rating
+    likes_count = news.get_likes_count
+    try:
+        like_status = news.does_user_like_me(user)
+        vote_status = news.get_user_vote(user)
+    except:
+        pass
+    context = {'news': news, 'likes_count': likes_count, 'like_status': like_status, 'rating': rating, 'vote_status': vote_status}
+    return render(request, 'politicians/news_page.html', context)
+
+def politica_comentario(request):
+    return render(request, 'politicians/politica_comentario.html')
