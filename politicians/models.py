@@ -38,10 +38,10 @@ class Fonte(models.Model):
         return self.nome
 
 class News(models.Model):
-    politician = models.ForeignKey(Politician)
     title = models.CharField(max_length=200)
     link = models.URLField(max_length=200)
     pub_date = models.DateTimeField('date published')
+    source = models.CharField(max_length=200)
     
     def __unicode__(self):
         return self.title
@@ -66,6 +66,10 @@ class News(models.Model):
             return -1
         else:
             return 0
+
+    def get_all_politicians(self):
+        return self.relevant_news.all()
+
 
 class User(models.Model):
     username = models.CharField(max_length=50)
