@@ -144,7 +144,7 @@ def edit_review(request, review_id):
 				'review': review, 'review_user': review_user, 'est5': est5, 'est4': est4, 'est3': est3, 'est2': est2, 'est1': est1,
 				'est5pc': int(100*est5/float(totalest)), 'est4pc': int(100*est4/float(totalest)), 'est3pc': int(100*est3/float(totalest)), 
 				'est2pc': int(100*est2/float(totalest)), 'est1pc': int(100*est1/float(totalest))
-				# , '5est_true':e5, '4est_true':e4,, '3est_true':e3, '2est_true':e2, '1est_true':e1
+				, 'est5_true':e5, 'est4_true':e4, 'est3_true':e3, 'est2_true':e2, 'est1_true':e1
 				}
 	return render(request, 'politicians/review.html', context)
 

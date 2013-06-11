@@ -239,7 +239,7 @@ class Review(models.Model):
     users_downvoted = models.ManyToManyField(User, blank=True, related_name="users_downvoted")
 
     def __unicode__(self):
-        return self.title
+        return self.titulo
     def utilidade(self):
         if (self.upvote + self.downvote) == 0:
             return 0
