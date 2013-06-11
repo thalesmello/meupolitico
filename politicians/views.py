@@ -5,10 +5,16 @@ from django.http import HttpResponse
 from politicians.models import Politician, News, User
 from django.utils import timezone
 from datetime import timedelta
+from datetime import date
 from crawler import add_news_to_db
 
 def home(request):
-    return render(request, 'politicians/home.html')
+    politicians_list = Politician.objects.all().order_by('id')
+    base_date = date(1987,3,9)
+    today = date.today()
+    politician_of_the_day = politicians_list[(today-base_date).days%len(politicians_list):((today-base_date).days%len(politicians_list)+5)]
+    context = {'politician_of_the_day': politician_of_the_day}
+    return render(request, 'politicians/home.html', context)
 
 def politicians(request):
     politicians_list = Politician.objects.all().order_by('name')

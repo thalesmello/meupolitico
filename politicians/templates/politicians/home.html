@@ -26,6 +26,20 @@
         <h2 class="image_subtitle">Realize Avaliações <br> do seu Político</h2>
     </div>
 </div>
+<br>
+<div class="row">
+<h1 id="info"> Políticos em destaque </h1>
+</div>
+<br>
+    {% if politician_of_the_day %}
+        <ul>
+        {% for politician in politician_of_the_day %}
+                <h3 class="title_text"> <a href="{% url 'politician_profile' politician.id %}">{{ politician.name }}</a></h3>       
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum político cadastrado.</p>
+    {% endif %}
 {% endblock %}
 
 {% block page_js %}
@@ -34,4 +48,5 @@
             $('#top_home').addClass('active');
         });
     </script>
-{% endblock %}
+{% endblock %}  
+
