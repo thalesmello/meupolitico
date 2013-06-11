@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from time import sleep
 
-from politicians.models import Politician, User
+from politicians.models import Politician, User, News
 
 class PoliticiansTest(LiveServerTestCase):
     fixtures = ['politicians.json']
@@ -199,7 +199,6 @@ class PoliticiansTest(LiveServerTestCase):
                 option.click()
         submit = self.browser.find_element_by_css_selector('input[type="submit"]')
         submit.click()
-
         body = self.browser.find_element_by_tag_name('body')
         self.assertIn(u'critica Secretaria da Micro', body.text)
         self.assertIn(u'Dilma detalha vetos', body.text)
@@ -249,4 +248,27 @@ class PoliticiansTest(LiveServerTestCase):
             else:
                 ctPos = ctPos + 1
         assert ctZero == 3 and ctNeg == 1 and ctPos == 1
+        pass
+
+    def test_bias(self):
+        news_set = News.objects.all().order_by('-pub_date')[:5]
+        obj1 = news_set[1]
+        obj2 = news_set[2]
+        obj1.bias = True
+        obj1.save()
+        obj2.bias = True
+        obj2.save()
+        self.browser.get(self.live_server_url+'/news/')
+        news0 = self.browser.find_element_by_css_selector('#bias0')
+        news1 = self.browser.find_element_by_css_selector('#bias1')
+        news2 = self.browser.find_element_by_css_selector('#bias2')
+        news3 = self.browser.find_element_by_css_selector('#bias3')
+        news4 = self.browser.find_element_by_css_selector('#bias4')
+
+        self.assertIn(u'Confiavel', news0.text)
+        self.assertIn(u'Tendenciosa', news1.text)
+        self.assertIn(u'Tendenciosa', news2.text)
+        self.assertIn(u'Confiavel', news3.text)
+        self.assertIn(u'Confiavel', news4.text)
+        # self.assertIn(element, )
         pass

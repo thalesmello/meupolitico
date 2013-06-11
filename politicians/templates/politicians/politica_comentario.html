@@ -1,0 +1,17 @@
+{% extends "politicians/base.html" %}
+
+{% block content %}
+<h1 id="heading_text">Meu Político - Política de Comentários</h1>
+<ol>
+	<li>São proibidas ofenças a outros usuários.</li>
+	<li>Seus comentários devem ser construtivos.</li>
+</ol>
+{% endblock %}
+
+{% block page_js %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#top_politicos').addClass('active');
+        });
+    </script>
+{% endblock %}

@@ -39,4 +39,8 @@ urlpatterns = patterns('',
     url(r'^unfavorite_politician/$', views.unfavorite_politician, name='unfavorite_politician'),
     # ex: /call_crawler/
     url(r'^call_crawler/$', views.call_crawler, name='call_crawler'),
+    # ex: /news/1/
+    url(r'^news/(?P<news_id>\d+)/$', views.news_page, name='news_page'),
+    url(r'^politica_comentario/$', views.politica_comentario, name='politica_comentario'),
+    url(r'^ranking/$', views.ranking, name='ranking'),
 )

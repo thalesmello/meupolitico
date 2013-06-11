@@ -1,22 +1,49 @@
 from django.db import models
 
+class Estado(models.Model):
+    name = models.CharField(max_length=30)
+    acronym = models.CharField(max_length=2)
+    def __unicode__(self):
+        return self.acronym
+
+class Cidade(models.Model):
+    name = models.CharField(max_length=50)
+    estado = models.ForeignKey(Estado)
+    acronym = models.CharField(max_length=55)
+    def __unicode__(self):
+        return self.acronym
+
+class Cargo(models.Model):
+    name = models.CharField(max_length=100)
+    def __unicode__(self):
+        return self.name
+
 class Party(models.Model):
     name = models.CharField(max_length=100)
     acronym = models.CharField(max_length=10)
     def __unicode__(self):
         return self.acronym
 
-class Politician(models.Model):
-    name = models.CharField(max_length=100)
-    party = models.ForeignKey(Party)
+class Fonte(models.Model):
+    nome = models.CharField(max_length=50)
+    site = models.CharField(max_length=150)
+    estrela1 = models.IntegerField(default=0)
+    estrela2 = models.IntegerField(default=0)
+    estrela3 = models.IntegerField(default=0)
+    estrela4 = models.IntegerField(default=0)
+    estrela5 = models.IntegerField(default=0)
+
     def __unicode__(self):
-        return self.name
+        return self.nome
+
 
 class News(models.Model):
-    politician = models.ForeignKey(Politician)
     title = models.CharField(max_length=200)
     link = models.URLField(max_length=200)
     pub_date = models.DateTimeField('date published')
+    source = models.CharField(max_length=200)
+    bias = models.BooleanField(default=False)
+    fonte = models.ForeignKey(Fonte)
     
     def __unicode__(self):
         return self.title
@@ -41,6 +68,38 @@ class News(models.Model):
             return -1
         else:
             return 0
+
+    def get_all_politicians(self):
+        return self.relevant_news.all()
+
+class Politician(models.Model):
+    name = models.CharField(max_length=100, default='')    
+    party = models.ForeignKey(Party)
+    relevant_news = models.ManyToManyField(News, blank=True, related_name="relevant_news")
+    foto_url = models.CharField(max_length=300, default='')
+    cargo = models.CharField(max_length=50, default='')
+    cidade = models.CharField(max_length=50, default='')
+    telefone = models.CharField(max_length=20, default='')
+    wikipedia = models.CharField(max_length=300, default='')
+    youtube = models.CharField(max_length=300, default='')
+    twitter = models.CharField(max_length=300, default='')
+    facebook = models.CharField(max_length=300, default='')
+    estrela1 = models.IntegerField(default=0)
+    estrela2 = models.IntegerField(default=0)
+    estrela3 = models.IntegerField(default=0)
+    estrela4 = models.IntegerField(default=0)
+    estrela5 = models.IntegerField(default=0)
+    def __unicode__(self):
+        return self.name
+    def get_relevant_news(self):
+        return self.relevant_news.all()
+    def is_relevant_news(self, news):
+        return news in self.get_relevant_news()
+    def add_relevant_news(self, news):
+        self.relevant_news.add(news)
+    def remove_relevant_news(self, news):
+        self.relevant_news.remove(news)
+
 
 class User(models.Model):
     username = models.CharField(max_length=50)
@@ -108,3 +167,4 @@ class User(models.Model):
 
     def favorited_politicians(self):
         return self.politicians_favorited.all()
+

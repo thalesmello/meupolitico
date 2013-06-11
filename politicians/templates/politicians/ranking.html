@@ -1,0 +1,36 @@
+{% extends "politicians/base.html" %}
+
+{% block content %}
+<h1 id="heading_text">Meu Político - Políticos</h1>
+
+{% if politicians_list %}
+    <ul>
+    {% for politician in politicians_list %}
+    	{% if forloop.counter0|divisibleby:"3" %}
+    		<div class="row">
+    	{% endif %}
+
+    	<div class="span12 politicianlist">
+            {% if politician.foto_url %}
+            <a><img class="foto_lista" src="{{ politician.foto_url }}" alt="{{ politician.name }}"></a>    
+            {% endif %}
+    		<h3 class="title_text"> <a href="{% url 'politician_profile' politician.id %}">{{ forloop.counter }} - {{ politician.name }}</a></h3>
+    	</div>
+
+    	{% if forloop.counter|divisibleby:"3" %}
+    		</div>
+    	{% endif %}        
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nenhum político cadastrado.</p>
+{% endif %}
+{% endblock %}
+
+{% block page_js %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#top_politicos').addClass('active');
+        });
+    </script>
+{% endblock %}

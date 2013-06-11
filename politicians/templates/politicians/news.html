@@ -1,4 +1,4 @@
-{% extends "politicians/base.html" %}
+﻿{% extends "politicians/base.html" %}
 
 {% block content %}
 <h1 id="heading_text">Meu Político - {{ news_heading }}</h1>
@@ -6,13 +6,16 @@
 {% if news_entry %}
     <div class="row">
     <div class="noticia-wrapper span10 offset1">
-    {% for news, like_count, like_status, rating, vote_status in news_entry %}
+    {% for news, like_count, like_status, rating, vote_status, polit_set, num in news_entry %}
 
         <div class="noticia">
             <h3 class="news_title"><a href="{{ news.link}}">{{ news.title }}</a> </h3>
             <p class="news_detail">
-            - <a href="{% url 'politician_profile' news.politician.id %}">{{ news.politician.name }}</a>
-                 - {{news.pub_date}}
+            - {% for polit in polit_set %}
+                <a href="{% url 'politician_profile' polit.id %}">{{ polit.name }}</a> -
+            {% endfor %}
+                 {{news.pub_date}}
+                 {{news.source}}
             </p>
         </div>
 
@@ -33,6 +36,14 @@
                 <input type="submit" name="like_button" value="Curtir"/>
             </form>
         {% endif %}
+
+        <span id='bias{{ num }}'>
+            {% if news.bias == True %}
+                Tendenciosa
+            {% else %}
+                Confiavel
+            {% endif  %}
+        </span>
 
 		<p name="rating">Grau de tendenciosidade: {{ rating }}</p>
 		{% if vote_status == None %}
@@ -58,7 +69,10 @@
 			{% endif %}
 			</form>
 		{% endif %}
-		
+		{% load comments %}
+		{% get_comment_count for politicians.news news.id as comment_count %}
+		<a href="{% url 'news_page' news.id %}">Ver comentários ({{ comment_count }})</a>
+
         {% if not forloop.last %}
             <hr class="news">
         {% endif %}

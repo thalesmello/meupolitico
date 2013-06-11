@@ -17,9 +17,175 @@
 },
 {
   "pk": 1, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-05-27T20:44:00Z", 
+    "link": "http://redir.folha.com.br/redir/online/poder/rss091/*http://www1.folha.uol.com.br/poder/2013/05/1285768-gilmar-mendes-critica-dilma-por-demora-nas-escolhas-para-o-stf.shtml", 
+    "source": "Folha de Sao Paulo", 
+    "title": "Gilmar Mendes critica Dilma por demora nas escolhas para o STF"
+  }
+},
+{
+  "pk": 2, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-05-27T18:36:00Z", 
+    "link": "http://redir.folha.com.br/redir/online/poder/rss091/*http://www1.folha.uol.com.br/poder/2013/05/1285618-ministra-do-tse-suspende-propagandas-do-psdb-com-aecio.shtml", 
+    "source": "Folha de Sao Paulo", 
+    "title": "Ministra do TSE suspende propaganda do PSDB com A\u00e9cio"
+  }
+},
+{
+  "pk": 3, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-05-27T17:28:12Z", 
+    "link": "http://noticias.terra.com.br/brasil/politica/em-nota-dilma-lamenta-morte-de-roberto-civita,5d6ad870a26ee310VgnCLD2000000ec6eb0aRCRD.html", 
+    "source": "Terra Noticias", 
+    "title": "Em nota, Dilma lamenta morte de Roberto Civita"
+  }
+},
+{
+  "pk": 4, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-05-26T15:47:56Z", 
+    "link": "http://noticias.terra.com.br/brasil/politica/marina-diz-que-dilma-deixa-marca-do-retrocesso-ambiental,4608c072e71ee310VgnVCM3000009acceb0aRCRD.html", 
+    "source": "Terra Noticias", 
+    "title": "Marina diz que Dilma deixa marca do \u2018retrocesso ambiental\u2019"
+  }
+},
+{
+  "pk": 5, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-05-26T03:10:24Z", 
+    "link": "http://noticias.terra.com.br/brasil/politica/dilma-exalta-potencial-de-petroleo-em-libra-minimiza-cpi-da-petrobras,7480b044757de310VgnCLD2000000ec6eb0aRCRD.html", 
+    "source": "Terra Noticias", 
+    "title": "Dilma exalta potencial de petr\u00f3leo em Libra; minimiza CPI da Petrobras"
+  }
+},
+{
+  "pk": 6, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-05-25T18:25:54Z", 
+    "link": "http://noticias.terra.com.br/brasil/politica/dilma-destaca-autonomia-da-africa-e-america-latina-na-etiopia,91aeb044757de310VgnCLD2000000ec6eb0aRCRD.html", 
+    "source": "Terra Noticias", 
+    "title": "Dilma destaca autonomia da \u00c1frica e Am\u00e9rica Latina na Eti\u00f3pia"
+  }
+},
+{
+  "pk": 7, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-05-25T18:17:53Z", 
+    "link": "http://noticias.terra.com.br/brasil/politica/vice-presidente-dos-eua-chega-ao-brasil-na-segunda-feira,e740ddceb96de310VgnCLD2000000dc6eb0aRCRD.html", 
+    "source": "Terra Noticias", 
+    "title": "Vice-presidente dos EUA chega ao Brasil na segunda-feira"
+  }
+},
+{
+  "pk": 8, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-05-25T12:45:28Z", 
+    "link": "http://noticias.terra.com.br/brasil/politica/grupos-religiosos-organizam-ofensiva-contra-indicacao-ao-stf,a8d3098b3abde310VgnVCM20000099cceb0aRCRD.html", 
+    "source": "Terra Noticias", 
+    "title": "Grupos religiosos organizam ofensiva contra indica\u00e7\u00e3o ao STF"
+  }
+},
+{
+  "pk": 9, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-05-25T01:19:31Z", 
+    "link": "http://noticias.terra.com.br/brasil/politica/petistas-criticam-pressao-de-cabral-sobre-dilma-e-bravata,c66efe6ab39de310VgnVCM20000099cceb0aRCRD.html", 
+    "source": "Terra Noticias", 
+    "title": "Petistas criticam press\u00e3o de Cabral sobre Dilma: '\u00e9 bravata'"
+  }
+},
+{
+  "pk": 10, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-05-24T22:28:50Z", 
+    "link": "http://noticias.terra.com.br/brasil/politica/em-dia-de-presidente-renan-e-chamado-de-filho-de-meretriz-na-wikipedia,218bd9925a8de310VgnVCM4000009bcceb0aRCRD.html", 
+    "source": "Terra Noticias", 
+    "title": "Em dia de presidente, Renan \u00e9 chamado de 'filho de meretriz' na Wikip\u00e9dia"
+  }
+},
+{
+  "pk": 11, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-05-24T19:40:10Z", 
+    "link": "http://noticias.terra.com.br/brasil/politica/presidente-em-exercicio-renan-calheiros-despacha-no-planalto,c4964837008de310VgnVCM4000009bcceb0aRCRD.html", 
+    "source": "Terra Noticias", 
+    "title": "Presidente em exerc\u00edcio, Renan Calheiros despacha no Planalto"
+  }
+},
+{
+  "pk": 12, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-05-24T17:30:43Z", 
+    "link": "http://noticias.terra.com.br/brasil/politica/dilma-rousseff-reune-se-hoje-com-primeiro-ministro-etiope,1d0addceb96de310VgnCLD2000000dc6eb0aRCRD.html", 
+    "source": "Terra Noticias", 
+    "title": "Dilma Rousseff re\u00fane-se hoje com primeiro-ministro et\u00edope"
+  }
+},
+{
+  "pk": 13, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-05-27T11:52:00Z", 
+    "link": "http://brasileconomico.ig.com.br/noticias/rio-de-janeiro-e-so-a-ponta-do-iceberg-na-disputa-pt-x-pmdb_132438.html", 
+    "source": "Brasil Economico", 
+    "title": "Rio de Janeiro \u00e9 s\u00f3 a ponta do iceberg na disputa PT x PMDB"
+  }
+},
+{
+  "pk": 14, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-05-23T19:17:00Z", 
+    "link": "http://brasileconomico.ig.com.br/noticias/terceiro-na-linha-sucessoria-calheiros-assume-presidencia-amanha_132366.html", 
+    "source": "Brasil Economico", 
+    "title": "Terceiro na linha sucess\u00f3ria, Calheiros assume presid\u00eancia amanh\u00e3"
+  }
+},
+{
+  "pk": 15, 
+  "model": "politicians.news", 
+  "fields": {
+    "pub_date": "2013-04-18T22:12:08Z", 
+    "link": "http://blogs.estadao.com.br/radar-politico/2013/04/18/indios-cercam-palacio-do-planalto-contra-proposta-que-transfere-ao-congresso-a-demarcacao-de-terras/", 
+    "source": "Estadao", 
+    "title": "\u00cdndios cercam Pal\u00e1cio do Planalto contra proposta que transfere ao Congresso a demarca\u00e7\u00e3o de terras"
+  }
+},
+{
+  "pk": 1, 
   "model": "politicians.politician", 
   "fields": {
     "party": 1, 
+    "relevant_news": [
+      1, 
+      3, 
+      4, 
+      5, 
+      6, 
+      7, 
+      8, 
+      9, 
+      10, 
+      11, 
+      12, 
+      13, 
+      14, 
+      15
+    ], 
     "name": "Dilma Rousseff"
   }
 },
@@ -28,6 +194,7 @@
   "model": "politicians.politician", 
   "fields": {
     "party": 2, 
+    "relevant_news": [], 
     "name": "Jos\u00e9 Serra"
   }
 },
@@ -36,87 +203,11 @@
   "model": "politicians.politician", 
   "fields": {
     "party": 2, 
+    "relevant_news": [
+      2, 
+      9
+    ], 
     "name": "A\u00e9cio Neves"
-  }
-},
-{
-  "pk": 1, 
-  "model": "politicians.news", 
-  "fields": {
-    "pub_date": "2013-04-03T18:24:00Z", 
-    "link": "http://g1.globo.com/politica/noticia/2013/04/dilma-vai-sao-paulo-para-compromissos-privados.html", 
-    "politician": 1, 
-    "title": "Dilma vai a S\u00e3o Paulo para compromissos privados"
-  }
-},
-{
-  "pk": 2, 
-  "model": "politicians.news", 
-  "fields": {
-    "pub_date": "2013-04-03T13:10:00Z", 
-    "link": "http://g1.globo.com/economia/agronegocios/noticia/2013/04/governo-anuncia-recursos-para-municipios-que-sofrem-com-seca.html", 
-    "politician": 1, 
-    "title": "Governo anuncia recursos para munic\u00edpios que sofrem com a seca"
-  }
-},
-{
-  "pk": 3, 
-  "model": "politicians.news", 
-  "fields": {
-    "pub_date": "2013-04-01T21:08:00Z", 
-    "link": "http://www.estadao.com.br/noticias/nacional,serra-se-nega-a-comentar-candidatura-de-aecio-a-presidencia-do-psdb,1015655,0.htm", 
-    "politician": 2, 
-    "title": "Serra se nega a comentar candidatura de A\u00e9cio \u00e0 presid\u00eancia do PSDB"
-  }
-},
-{
-  "pk": 4, 
-  "model": "politicians.news", 
-  "fields": {
-    "pub_date": "2013-03-30T15:33:00Z", 
-    "link": "http://www.estadao.com.br/noticias/nacional,aecio-critica-secretaria-da-micro-e-pequena-empresa,1014949,0.htm", 
-    "politician": 3, 
-    "title": "A\u00e9cio critica Secretaria da Micro e Pequena Empresa"
-  }
-},
-{
-  "pk": 5, 
-  "model": "politicians.news", 
-  "fields": {
-    "pub_date": "2012-12-20T01:25:00Z", 
-    "link": "http://g1.globo.com/politica/noticia/2012/12/dilma-recebe-ministros-no-alvorada-para-confraternizacao-de-natal.html", 
-    "politician": 1, 
-    "title": "Dilma recebe ministros no Alvorada para confraterniza\u00e7\u00e3o de Natal"
-  }
-},
-{
-  "pk": 6, 
-  "model": "politicians.news", 
-  "fields": {
-    "pub_date": "2012-12-03T08:41:32Z", 
-    "link": "http://g1.globo.com/politica/noticia/2012/12/dilma-detalha-vetos-redivisao-dos-royalties-do-petroleo-no-diario-oficial.html", 
-    "politician": 1, 
-    "title": "Dilma detalha vetos \u00e0 redivis\u00e3o dos royalties do petr\u00f3leo no Di\u00e1rio Oficial"
-  }
-},
-{
-  "pk": 7, 
-  "model": "politicians.news", 
-  "fields": {
-    "pub_date": "2011-08-19T14:09:00Z", 
-    "link": "http://g1.globo.com/bom-dia-brasil/noticia/2011/08/dilma-se-reune-com-governadores-do-sudeste-para-combater-miseria.html", 
-    "politician": 1, 
-    "title": "Dilma se re\u00fane com governadores do Sudeste para combater mis\u00e9ria"
-  }
-},
-{
-  "pk": 8, 
-  "model": "politicians.news", 
-  "fields": {
-    "pub_date": "2013-04-04T19:48:00Z", 
-    "link": "http://www.estadao.com.br/noticias/geral,dilma-reune-se-com-lobao-marco-da-mineracao-em-foco,1016983,0.htm", 
-    "politician": 1, 
-    "title": "Dilma re\u00fane-se com Lob\u00e3o; marco da minera\u00e7\u00e3o em foco"
   }
 },
 {
@@ -125,8 +216,12 @@
   "fields": {
     "username": "caio", 
     "politicians_favorited": [], 
-    "news_liked": [], 
-    "news_downvoted": [], 
+    "news_liked": [
+      1
+    ], 
+    "news_downvoted": [
+      1
+    ], 
     "password": "caio", 
     "news_upvoted": []
   }

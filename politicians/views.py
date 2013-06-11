@@ -15,9 +15,14 @@ def politicians(request):
     context = {'politicians_list': politicians_list}
     return render(request, 'politicians/politicians.html', context)
 
+def ranking(request):
+    politicians_list = Politician.objects.all().order_by('-estrela5')
+    context = {'politicians_list': politicians_list}
+    return render(request, 'politicians/ranking.html', context)
+
 def politician_profile(request, politician_id):
     politician = get_object_or_404(Politician, pk=politician_id)
-    recent_news = politician.news_set.all().order_by('-pub_date')[:5]
+    recent_news = politician.relevant_news.all().order_by('-pub_date')[:5]
     is_favorited = False
     try:
         username = request.session['username']
@@ -130,7 +135,13 @@ def context_for_news_list(request,news_list):
         else:
             news_vote_status.append(None)
 
-    news_entry = zip(news_list,news_like_count,news_like_status, news_rating, news_vote_status)
+    news_politician_set = []
+    for news in news_list:
+        news_politician_set.append(news.get_all_politicians())
+        
+    num_news_list = range(len(news_list))
+    news_entry = zip(news_list,news_like_count,news_like_status,
+                    news_rating,news_vote_status,news_politician_set,num_news_list)
 
     return {'news_heading': 'Notícias Recentes', 'news_entry': news_entry}
 
@@ -151,7 +162,7 @@ def login_user(request):
         try:
             name = request.POST['name']
             user = User.objects.get(username=name)
-        except KeyError, User.DoesNotExist:
+        except:
             context = {'message': "Usuario inexistente"}
             return render(request, 'politicians/login.html', context)
         if user.password == request.POST['password']:
@@ -231,3 +242,30 @@ def unfavorite_politician(request):
 def call_crawler(request):
     news_added = add_news_to_db()
     return HttpResponse("{} news were added to DB".format(news_added))
+
+def news_page(request, news_id):
+    news = get_object_or_404(News, pk=news_id)
+    like_status = None
+    vote_status = None
+    try:
+        username = request.session['username']
+        user = User.objects.get(username__exact=username)
+        user_logged_in = True
+    except KeyError, User.DoesNotExist:
+        user_logged_in = False
+    rating = news.get_news_rating
+    likes_count = news.get_likes_count
+    try:
+        like_status = news.does_user_like_me(user)
+        vote_status = news.get_user_vote(user)
+    except:
+        pass
+
+    polit_set = news.get_all_politicians()
+
+    context = {'news': news, 'likes_count': likes_count, 'like_status': like_status, 'rating': rating, 'vote_status': vote_status,
+        'polit_set': polit_set}
+    return render(request, 'politicians/news_page.html', context)
+
+def politica_comentario(request):
+    return render(request, 'politicians/politica_comentario.html')
