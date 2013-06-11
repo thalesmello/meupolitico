@@ -36,7 +36,6 @@ class Fonte(models.Model):
     def __unicode__(self):
         return self.nome
 
-
 class News(models.Model):
     title = models.CharField(max_length=200)
     link = models.URLField(max_length=200)
@@ -84,11 +83,15 @@ class Politician(models.Model):
     youtube = models.CharField(max_length=300, default='')
     twitter = models.CharField(max_length=300, default='')
     facebook = models.CharField(max_length=300, default='')
+
     estrela1 = models.IntegerField(default=0)
     estrela2 = models.IntegerField(default=0)
     estrela3 = models.IntegerField(default=0)
     estrela4 = models.IntegerField(default=0)
     estrela5 = models.IntegerField(default=0)
+
+    # reviews = models.ManyToManyField(Review, blank=True, related_name="reviews")
+
     def __unicode__(self):
         return self.name
     def get_relevant_news(self):
@@ -117,6 +120,13 @@ class Politician(models.Model):
     def estrelas1percent(self):
         return self.estrelaspercent(self.estrela1)
 
+    # def get_reviews(self):
+    #     return self.reviews.all()
+    # def add_review(self, review):
+    #     self.reviews.add(review)
+    # def remove_review(self, review):
+    #     self.reviews.remove(news)
+
 
 class User(models.Model):
     username = models.CharField(max_length=50)
@@ -125,6 +135,10 @@ class User(models.Model):
     politicians_favorited = models.ManyToManyField(Politician, blank=True)
     news_upvoted = models.ManyToManyField(News, blank=True, related_name="news_upvoted")
     news_downvoted = models.ManyToManyField(News, blank=True, related_name="news_downvoted")
+    # reviews_upvoted = models.ManyToManyField(Review, blank=True, related_name="reviews_upvoted")
+    # reviews_downvoted = models.ManyToManyField(Review, blank=True, related_name="reviews_downvoted")
+    # reviews_feitas = models.ManyToManyField(Review, blank=True, related_name="reviews_feitas")
+
 
     def __unicode__(self):
         return self.username
@@ -165,6 +179,43 @@ class User(models.Model):
             self.news_downvoted.remove(news)
         return
 
+    def get_reviews(self):
+        return self.reviews_feitas.all()
+    def add_review(self, review):
+        self.reviews_feitas.add(review)
+    def remove_review(self, review):
+        self.reviews_feitas.remove(news)
+
+    # def upvote_review(self, review):
+    #     if (self in review.reviews_upvoted.all()):
+    #         self.reviews_upvoted.remove(news)
+    #     if (self in news.reviews_downvoted.all()):
+    #         self.reviews_downvoted.remove(news)
+    #     self.reviews_upvoted.add(news)
+    #     return
+
+    # def downvote_review(self, review):
+    #     if (self in news.reviews_upvoted.all()):
+    #         self.reviews_upvoted.remove(news)
+    #     if (self in news.reviews_downvoted.all()):
+    #         self.reviews_downvoted.remove(news)
+    #     self.reviews_downvoted.add(news)
+    #     return
+
+    # def undo_upvote_review(self, review):
+    #     if (self in news.reviews_upvoted.all()):
+    #         self.reviews_upvoted.remove(news)
+    #     if (self in news.reviews_downvoted.all()):
+    #         self.reviews_downvoted.remove(news)
+    #     return
+
+    # def undo_downvote_review(self, review):
+    #     if (self in news.reviews_upvoted.all()):
+    #         self.reviews_upvoted.remove(news)
+    #     if (self in news.reviews_downvoted.all()):
+    #         self.reviews_downvoted.remove(news)
+    #     return
+
     def favorite_politician(self,politician_id):
         try:
             politician = Politician.objects.get(pk=politician_id)
@@ -185,3 +236,66 @@ class User(models.Model):
     def favorited_politicians(self):
         return self.politicians_favorited.all()
 
+class Review(models.Model):
+    titulo = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
+    texto = models.CharField(max_length=10000)
+    user = models.ForeignKey(User)
+    politico = models.ForeignKey(Politician)
+    upvote = models.IntegerField(default=0)
+    downvote = models.IntegerField(default=0)
+    numestrelas = models.IntegerField(default=0)
+    users_upvoted = models.ManyToManyField(User, blank=True, related_name="users_upvoted")
+    users_downvoted = models.ManyToManyField(User, blank=True, related_name="users_downvoted")
+
+    def __unicode__(self):
+        return self.title
+    def utilidade(self):
+        if (self.upvote + self.downvote) == 0:
+            return 0
+        else:
+            return 1 + 100*self.upvote/float(self.downvote)
+
+    @classmethod
+    def get_model_fields(model):
+        return model._meta.fields
+
+    def upvote_review(self, user):
+        if (user in self.users_upvoted.all()):
+            self.users_upvoted.remove(user)
+            self.upvote = self.upvote - 1
+        if (user in self.users_downvoted.all()):
+            self.users_downvoted.remove(user)
+            self.downvote = self.downvote - 1
+        self.users_upvoted.add(user)
+        self.upvote = self.upvote + 1
+        return
+
+    def downvote_review(self, user):
+        if (user in self.users_upvoted.all()):
+            self.users_upvoted.remove(user)
+            self.upvote = self.upvote - 1
+        if (user in self.users_downvoted.all()):
+            self.users_downvoted.remove(user)
+            self.downvote = self.downvote - 1
+        self.users_downvoted.add(user)
+        self.downvote = self.downvote + 1
+        return
+
+    def undo_upvote_review(self, user):
+        if (user in self.users_upvoted.all()):
+            self.users_upvoted.remove(user)
+            self.upvote = self.upvote - 1
+        if (user in self.users_downvoted.all()):
+            self.users_downvoted.remove(user)
+            self.downvote = self.downvote - 1
+        return
+
+    def undo_downvote_review(self, user):
+        if (user in self.users_upvoted.all()):
+            self.users_upvoted.remove(user)
+            self.upvote = self.upvote - 1
+        if (user in self.users_downvoted.all()):
+            self.users_downvoted.remove(user)
+            self.downvote = self.downvote - 1
+        return

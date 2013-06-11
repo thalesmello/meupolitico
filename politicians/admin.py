@@ -8,6 +8,7 @@ admin.site.register(Cargo)
 admin.site.register(Party)
 admin.site.register(Politician)
 admin.site.register(News)
+admin.site.register(Review)
 
 class UserAdmin(admin.ModelAdmin):
     filter_horizontal = ('news_liked', 'politicians_favorited', )

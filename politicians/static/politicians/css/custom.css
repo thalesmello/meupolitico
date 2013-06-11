@@ -102,8 +102,12 @@ div #login_page{
 }
 body{ margin:0}
 .wrap{ width:600px; height:200px}
-.esq{ width:200px; float:left}
-.dir{ width:400px; float:left}
+.esq{ width:200px; float:left; text-align:left;}
+.dir{ width:400px; float:left; margin-left: 20px; text-align:left;}
+p.dir{
+	position: relative;
+	margin-left: 40px;
+}
 div #contact_links{
 text-align:center;
 width: 100%;
@@ -147,4 +151,7 @@ table.barra_estrelas{
 	text-align: start;
 	display: table;
 	border-collapse: separate;
+}
+input[type="radio"]{
+	margin: -2px 0 0;
 }

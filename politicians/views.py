@@ -2,7 +2,7 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from politicians.models import Politician, News, User
+from politicians.models import Politician, News, User, Review
 from django.utils import timezone
 from datetime import timedelta
 from crawler import add_news_to_db
@@ -23,14 +23,76 @@ def ranking(request):
 def politician_profile(request, politician_id):
     politician = get_object_or_404(Politician, pk=politician_id)
     recent_news = politician.relevant_news.all().order_by('-pub_date')[:5]
-    is_favorited = False
+    reviews_politico = Review.objects.filter(politico=int(politician_id)).order_by('-pub_date')[:5] #utilizar utilidade()
+    review_user = None
     try:
         username = request.session['username']
         user = User.objects.get(username__exact=username)
         is_favorited = user.has_favorited(politician)
+        for r in reviews_politico:
+            if r.user == user.id:
+                review_user = r
     except KeyError, User.DoesNotExist:
         pass
-    context = {'politician': politician, 'recent_news': recent_news, 'is_favorited': is_favorited}
+    
+    context = {'politician': politician, 'recent_news': recent_news, 'is_favorited': is_favorited,
+                'reviews': reviews_politico, 'review_user': review_user}
+    return render(request, 'politicians/politician_profile.html', context)
+
+def politician_review(request, politician_id):
+    politician = get_object_or_404(Politician, pk=politician_id)
+    recent_news = politician.relevant_news.all().order_by('-pub_date')[:5]
+    reviews_politico = Review.objects.filter(politico=int(politician_id)).order_by('-pub_date')[:5] #utilizar utilidade()
+    review_user = None
+    try:
+        username = request.session['username']
+        user = User.objects.get(username__exact=username)
+        is_favorited = user.has_favorited(politician)
+        for r in reviews_politico:
+            if r.user == user.id:
+                review_user = r
+    except KeyError, User.DoesNotExist:
+        pass
+    
+    context = {'politician': politician, 'recent_news': recent_news, 'is_favorited': is_favorited,
+                'reviews': reviews_politico, 'review_user': review_user}
+    return render(request, 'politicians/politician_review.html', context)
+
+def add_review(request, politician_id):
+    if request.method == 'POST':
+        num_estrelas = request.POST['num_estrelas']
+        review_titulo = request.POST['review_titulo']
+        review_texto = request.POST['review_texto']
+
+        try:
+            review = Review.objects.create(    titulo = review_titulo,
+                pub_date = timezone.now(),
+                texto = review_texto,
+                user = request.session['user'],
+                politico = get_object_or_404(Politician, pk=politician_id),
+                numestrelas = int(num_estrelas)
+            )
+
+        except KeyError, User.DoesNotExist:
+            pass
+    
+
+    politician = get_object_or_404(Politician, pk=politician_id)
+    recent_news = politician.relevant_news.all().order_by('-pub_date')[:5]
+    reviews_politico = Review.objects.filter(politico=int(politician_id)).order_by('-pub_date')[:5] #utilizar utilidade()
+    review_user = None
+    try:
+        username = request.session['username']
+        user = User.objects.get(username__exact=username)
+        is_favorited = user.has_favorited(politician)
+        for r in reviews_politico:
+            if r.user == user.id:
+                review_user = r
+    except KeyError, User.DoesNotExist:
+        pass
+    
+    context = {'politician': politician, 'recent_news': recent_news, 'is_favorited': is_favorited,
+                'reviews': reviews_politico, 'review_user': review_user}
     return render(request, 'politicians/politician_profile.html', context)
 
 def news_search(request):
@@ -166,6 +228,7 @@ def login_user(request):
             context = {'message': "Usuario inexistente"}
             return render(request, 'politicians/login.html', context)
         if user.password == request.POST['password']:
+            request.session['user'] = user
             request.session['username'] = user.username
             return render(request, 'politicians/home.html')
         else:
