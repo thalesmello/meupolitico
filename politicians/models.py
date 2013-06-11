@@ -99,6 +99,23 @@ class Politician(models.Model):
         self.relevant_news.add(news)
     def remove_relevant_news(self, news):
         self.relevant_news.remove(news)
+    def get_total_estrelas(self):
+        return self.estrela1+self.estrela2+self.estrela3+self.estrela4+self.estrela5
+    def estrelaspercent(self, num):
+        if self.get_total_estrelas() is not 0:
+            return int(100*(1+num)/float(1+self.get_total_estrelas()))
+        else:
+            return 0
+    def estrelas5percent(self):
+        return self.estrelaspercent(self.estrela5)
+    def estrelas4percent(self):
+        return self.estrelaspercent(self.estrela4)
+    def estrelas3percent(self):
+        return self.estrelaspercent(self.estrela3)
+    def estrelas2percent(self):
+        return self.estrelaspercent(self.estrela2)
+    def estrelas1percent(self):
+        return self.estrelaspercent(self.estrela1)
 
 
 class User(models.Model):

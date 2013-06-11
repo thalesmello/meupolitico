@@ -16,12 +16,48 @@
 <a href="{{ politician.youtube }}"><img class="urlimg" id="youtube" src="{% static 'politicians/images/youtube.png' %}" alt="youtube"></a>     
 <a href="{{ politician.wikipedia }}"><img class="urlimg" id="wikipedia" src="{% static 'politicians/images/wikipedia.png' %}" alt="wikipedia"></a>
 </div>
-<p>Review</p>
-<p>5 Estrelas: {{ politician.estrela5 }}</p>
-<p>4 Estrelas: {{ politician.estrela4 }}</p>
-<p>3 Estrelas: {{ politician.estrela3 }}</p>
-<p>2 Estrelas: {{ politician.estrela2 }}</p>
-<p>1 Estrela: {{ politician.estrela1 }}</p>
+<p>Reviews</p>
+
+<table border="0" cellspacing="1" cellpadding="0" align="left" class="barra_estrelas">
+<tbody>
+
+<tr>
+<td class="barra_estrelas_texto" align="left">
+  <a>5 Estrelas:&nbsp;</a>
+</td>
+<td class="barra_estrelas" width="80" align="left"><div class="barra_estrelas" style="width:{{politician.estrelas5percent}}%;"></div></td>
+<td align="right">&nbsp;({{ politician.estrela5 }})</td>
+</tr>
+<tr>
+<td class="barra_estrelas_texto" align="left">
+  <a>4 Estrelas:&nbsp;</a>
+</td>
+<td class="barra_estrelas" width="80" align="left"><div class="barra_estrelas" style="width:{{politician.estrelas4percent}}%;"></div></td>
+<td align="right">&nbsp;({{ politician.estrela4 }})</td>
+</tr>
+<tr>
+<td class="barra_estrelas_texto" align="left">
+  <a>3 Estrelas:&nbsp;</a>
+</td>
+<td class="barra_estrelas" width="80" align="left"><div class="barra_estrelas" style="width:{{politician.estrelas3percent}}%;"></div></td>
+<td align="right">&nbsp;({{ politician.estrela3 }})</td>
+</tr>
+<tr>
+<td class="barra_estrelas_texto" align="left">
+  <a>2 Estrelas:&nbsp;</a>
+</td>
+<td class="barra_estrelas" width="80" align="left"><div class="barra_estrelas" style="width:{{politician.estrelas2percent}}%;"></div></td>
+<td align="right">&nbsp;({{ politician.estrela2 }})</td>
+</tr>
+<tr>
+<td class="barra_estrelas_texto" align="left">
+  <a>1 Estrela:&nbsp;</a>
+</td>
+<td class="barra_estrelas" width="80" align="left"><div class="barra_estrelas" style="width:{{politician.estrelas1percent}}%;"></div></td>
+<td align="right">&nbsp;({{ politician.estrela1 }})</td>
+</tr>
+
+</tbody></table>
 
 </div>
 

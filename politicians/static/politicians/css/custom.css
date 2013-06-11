@@ -118,3 +118,33 @@ div.politicianlist{
 	height: 150px;
 	position: relative
 }
+td.barra_estrelas{
+	min-width:60;
+	background-color: #eeeecc;
+}
+td.barra_estrelas_texto{
+	white-space:nowrap;
+	font-size:15px;
+}
+div.barra_estrelas{
+	background-color:#FFCC66;
+	height:18px;
+}
+table.barra_estrelas{
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-spacing: 1px;
+	float: left;
+	white-space: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-size: medium;
+	font-variant: normal;
+	font-style: normal;
+	color: -webkit-text;
+	text-align: start;
+	display: table;
+	border-collapse: separate;
+}
