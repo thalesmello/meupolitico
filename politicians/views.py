@@ -16,7 +16,7 @@ def politicians(request):
     return render(request, 'politicians/politicians.html', context)
 
 def ranking(request):
-    politicians_list = Politician.objects.all().order_by('name')
+    politicians_list = Politician.objects.all().order_by('-estrela5')
     context = {'politicians_list': politicians_list}
     return render(request, 'politicians/ranking.html', context)
 
