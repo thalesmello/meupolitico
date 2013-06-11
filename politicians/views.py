@@ -255,7 +255,11 @@ def news_page(request, news_id):
         vote_status = news.get_user_vote(user)
     except:
         pass
-    context = {'news': news, 'likes_count': likes_count, 'like_status': like_status, 'rating': rating, 'vote_status': vote_status}
+
+    polit_set = news.get_all_politicians()
+
+    context = {'news': news, 'likes_count': likes_count, 'like_status': like_status, 'rating': rating, 'vote_status': vote_status,
+        'polit_set': polit_set}
     return render(request, 'politicians/news_page.html', context)
 
 def politica_comentario(request):
