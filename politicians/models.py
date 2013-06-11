@@ -109,16 +109,6 @@ class Politician(models.Model):
             return int(100*(1+num)/float(1+self.get_total_estrelas()))
         else:
             return 0
-    def estrelas5percent(self):
-        return self.estrelaspercent(self.estrela5)
-    def estrelas4percent(self):
-        return self.estrelaspercent(self.estrela4)
-    def estrelas3percent(self):
-        return self.estrelaspercent(self.estrela3)
-    def estrelas2percent(self):
-        return self.estrelaspercent(self.estrela2)
-    def estrelas1percent(self):
-        return self.estrelaspercent(self.estrela1)
 
     # def get_reviews(self):
     #     return self.reviews.all()
@@ -256,6 +246,8 @@ class Review(models.Model):
         else:
             return 1 + 100*self.upvote/float(self.downvote)
 
+    def isnestrelas(self, val):
+        return self.numestrelas == val
     @classmethod
     def get_model_fields(model):
         return model._meta.fields

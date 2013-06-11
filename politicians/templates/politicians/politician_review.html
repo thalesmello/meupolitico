@@ -27,39 +27,45 @@
 <td class="barra_estrelas_texto" align="left">
   <a>5 Estrelas:&nbsp;</a>
 </td>
-<td class="barra_estrelas" width="80" align="left"><div class="barra_estrelas" style="width:{{politician.estrelas5percent}}%;"></div></td>
-<td align="right">&nbsp;({{ politician.estrela5 }})</td>
+<td class="barra_estrelas" width="80" align="left"><div class="barra_estrelas" style="width:{{est5pc}}%;"></div></td>
+<td align="right">&nbsp;({{ est5 }})</td>
 </tr>
 <tr>
 <td class="barra_estrelas_texto" align="left">
   <a>4 Estrelas:&nbsp;</a>
 </td>
-<td class="barra_estrelas" width="80" align="left"><div class="barra_estrelas" style="width:{{politician.estrelas4percent}}%;"></div></td>
-<td align="right">&nbsp;({{ politician.estrela4 }})</td>
+<td class="barra_estrelas" width="80" align="left"><div class="barra_estrelas" style="width:{{est4pc}}%;"></div></td>
+<td align="right">&nbsp;({{ est4 }})</td>
 </tr>
 <tr>
 <td class="barra_estrelas_texto" align="left">
   <a>3 Estrelas:&nbsp;</a>
 </td>
-<td class="barra_estrelas" width="80" align="left"><div class="barra_estrelas" style="width:{{politician.estrelas3percent}}%;"></div></td>
-<td align="right">&nbsp;({{ politician.estrela3 }})</td>
+<td class="barra_estrelas" width="80" align="left"><div class="barra_estrelas" style="width:{{est3pc}}%;"></div></td>
+<td align="right">&nbsp;({{ est3 }})</td>
 </tr>
 <tr>
 <td class="barra_estrelas_texto" align="left">
   <a>2 Estrelas:&nbsp;</a>
 </td>
-<td class="barra_estrelas" width="80" align="left"><div class="barra_estrelas" style="width:{{politician.estrelas2percent}}%;"></div></td>
-<td align="right">&nbsp;({{ politician.estrela2 }})</td>
+<td class="barra_estrelas" width="80" align="left"><div class="barra_estrelas" style="width:{{est2pc}}%;"></div></td>
+<td align="right">&nbsp;({{ est2 }})</td>
 </tr>
 <tr>
 <td class="barra_estrelas_texto" align="left">
   <a>1 Estrela:&nbsp;</a>
 </td>
-<td class="barra_estrelas" width="80" align="left"><div class="barra_estrelas" style="width:{{politician.estrelas1percent}}%;"></div></td>
-<td align="right">&nbsp;({{ politician.estrela1 }})</td>
+<td class="barra_estrelas" width="80" align="left"><div class="barra_estrelas" style="width:{{est1pc}}%;"></div></td>
+<td align="right">&nbsp;({{ est1 }})</td>
 </tr>
 
 </tbody></table>
+
+{% if review_user %}
+<a href="" id="EditarReview" data-message="mensagem" class="btn btn-primary">Editar Review</a>
+{% else %}
+<a href="{% url 'politician_review' politician.id %}" id="CriarReview" data-message="mensagem" class="btn btn-primary">Criar  Review</a>
+{% endif %}
 
 </div>
 <!-- <p>
