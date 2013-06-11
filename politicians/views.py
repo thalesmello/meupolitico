@@ -157,7 +157,7 @@ def login_user(request):
         try:
             name = request.POST['name']
             user = User.objects.get(username=name)
-        except KeyError, User.DoesNotExist:
+        except:
             context = {'message': "Usuario inexistente"}
             return render(request, 'politicians/login.html', context)
         if user.password == request.POST['password']:
