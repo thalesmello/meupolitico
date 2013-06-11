@@ -1,9 +1,9 @@
 <div id="login_header">
 				{% if request.session.username != none %}
-                    <p> Bem vindo, {{request.session.username}} </p>
+                    <p id="login_message"> Bem vindo, {{request.session.username}} </p>
                     <p id="top_logout"><a href="{% url 'logout' %}">Fazer logout</a></p>
                 {% else %}
-                    <p> Você não está logado. </p>
+                    <p id="login_message"> Você não está logado. </p>
                     <p id="top_login"><a href="{% url 'login' %}">Fazer login</a></p>
                 {% endif %}
 </div>
