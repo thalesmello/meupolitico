@@ -10,11 +10,11 @@
     		<div class="row">
     	{% endif %}
 
-    	<div class="span4 politicianlist">
+    	<div class="span12 politicianlist">
             {% if politician.foto_url %}
             <a><img class="foto_lista" src="{{ politician.foto_url }}" alt="{{ politician.name }}"></a>    
             {% endif %}
-    		<h3 class="title_text"> <a href="{% url 'politician_profile' politician.id %}">{{ politician.name }}</a></h3>
+    		<h3 class="title_text"> <a href="{% url 'politician_profile' politician.id %}">{{ forloop.counter }} - {{ politician.name }}</a></h3>
     	</div>
 
     	{% if forloop.counter|divisibleby:"3" %}

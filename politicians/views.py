@@ -15,6 +15,11 @@ def politicians(request):
     context = {'politicians_list': politicians_list}
     return render(request, 'politicians/politicians.html', context)
 
+def ranking(request):
+    politicians_list = Politician.objects.all().order_by('name')
+    context = {'politicians_list': politicians_list}
+    return render(request, 'politicians/ranking.html', context)
+
 def politician_profile(request, politician_id):
     politician = get_object_or_404(Politician, pk=politician_id)
     recent_news = politician.relevant_news.all().order_by('-pub_date')[:5]
