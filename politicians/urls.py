@@ -13,6 +13,11 @@ urlpatterns = patterns('',
     url(r'^politicians/$', views.politicians, name='politicians'),
     # ex: /politicians/1/
     url(r'^politicians/(?P<politician_id>\d+)/$', views.politician_profile, name='politician_profile'),
+    # ex: /politicianreview/1/
+    url(r'^politicianreview/(?P<politician_id>\d+)/$', views.politician_review, name='politician_review'),
+    url(r'^addreview/(?P<politician_id>\d+)/$', views.add_review, name='add_review'),
+    url(r'^editreview/(?P<review_id>\d+)/$', views.edit_review, name='edit_review'),
+    url(r'^changereview/(?P<review_id>\d+)/$', views.change_review, name='change_review'),
     # ex: /login/
     url(r'^login/$', views.login, name='login'),
     # ex: /login_user/

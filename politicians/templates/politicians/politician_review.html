@@ -62,7 +62,7 @@
 </tbody></table>
 
 {% if review_user %}
-<a href="{% url 'edit_review' review_user.id %}" id="EditarReview" data-message="mensagem" class="btn btn-primary">Editar Review</a>
+<a href="" id="EditarReview" data-message="mensagem" class="btn btn-primary">Editar Review</a>
 {% else %}
 <a href="{% url 'politician_review' politician.id %}" id="CriarReview" data-message="mensagem" class="btn btn-primary">Criar  Review</a>
 {% endif %}
@@ -79,60 +79,26 @@
 <div class="dir">
 
 <div class="row">
-<h4 class="dir">Noticias relacionadas ao politico</h3>
-{% if recent_news %}
-	
-    <div class="noticia-wrapper span10 offset1">
-    {% for news in recent_news %}
-    	    <div class="noticia">
-        <h3 class="news_title"><a href="{{ news.link}}">{{ news.title }}</a> </h3>
-        <p class="news_detail">
-        	 - {{news.pub_date}}
-         </p>
-         </div>
-        {% if not forloop.last %}
-        <hr class="news">
-        {% endif %}
-    {% endfor %}
-    </div>
+<h4 class="dir">Realize seu Review</h3>
+  <form class="dir" action={% url 'add_review' politician.id %} method={{ method|default:"post" }}>
+    {% csrf_token %}
+    <div class="dir">
+    <b>Número de Estrelas:&nbsp;</b>
+    <input type="radio" name="num_estrelas" value="5">5&nbsp;
+    <input type="radio" name="num_estrelas" value="4">4&nbsp;
+    <input type="radio" name="num_estrelas" value="3">3&nbsp;
+    <input type="radio" name="num_estrelas" value="2">2&nbsp;
+    <input type="radio" name="num_estrelas" value="1">1
+<br>
+    <b>Título:&nbsp;</b><input id="review_titulo" class="span8" type="text" name="review_titulo"/><br />
     
-{% else %}
-    <p class="dir">Nenhuma notícia recente.</p>
-{% endif %}
-</div>
-
-<div class="row">
-<h4 class="dir">Reviews do Político</h3>
-{% if reviews %}
+<br />
+    <b>Descrição:&nbsp;</b>
+    <textarea rows="16" id="review_texto" class="span8" type="text" name="review_texto"></textarea><br />
+    <button id="review_button" class="btn" type="submit">Enviar Review</button>
+  </div>
     
-    <div class="noticia-wrapper span10 offset1">
-    {% for review in reviews %}
-            <div class="noticia">
-        <h3 class="news_title"><p>{{ review.titulo }}</p> 
-        </h3>
-
-        <div style="display:inline-block">
-        <span class="news_detail" style="text-align:left; margin:0">
-             {{review.numestrelas}} Estrelas
-         </span>
-        <span class="news_detail" style="text-align:right; margin-left:200px">
-             - {{review.pub_date}}
-         </span>
-
-        <a href=""> por {{ review.user.username }}</a>
-        </div>
-
-            <p>{{ review.texto }}</p>
-         </div>
-        {% if not forloop.last %}
-        <hr class="news">
-        {% endif %}
-    {% endfor %}
-    </div>
-    
-{% else %}
-    <p class="dir">Ainda não há nenhum review.</p>
-{% endif %}
+</form>
 
 </div>
 

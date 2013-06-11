@@ -102,8 +102,12 @@ div #login_page{
 }
 body{ margin:0}
 .wrap{ width:600px; height:200px}
-.esq{ width:200px; float:left}
-.dir{ width:400px; float:left}
+.esq{ width:200px; float:left; text-align:left;}
+.dir{ width:400px; float:left; margin-left: 20px; text-align:left;}
+p.dir{
+	position: relative;
+	margin-left: 40px;
+}
 div #contact_links{
 text-align:center;
 width: 100%;
@@ -117,4 +121,37 @@ img.foto_lista{
 div.politicianlist{
 	height: 150px;
 	position: relative
+}
+td.barra_estrelas{
+	min-width:60;
+	background-color: #eeeecc;
+}
+td.barra_estrelas_texto{
+	white-space:nowrap;
+	font-size:15px;
+}
+div.barra_estrelas{
+	background-color:#FFCC66;
+	height:18px;
+}
+table.barra_estrelas{
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-spacing: 1px;
+	float: left;
+	white-space: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-size: medium;
+	font-variant: normal;
+	font-style: normal;
+	color: -webkit-text;
+	text-align: start;
+	display: table;
+	border-collapse: separate;
+}
+input[type="radio"]{
+	margin: -2px 0 0;
 }
