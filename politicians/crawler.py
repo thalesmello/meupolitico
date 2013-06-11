@@ -1,6 +1,6 @@
 import feedparser
 from dateutil import parser
-from politicians.models import Politician, News
+from politicians.models import Politician, News, Fonte
 
 class FeedCrawler(object):
     def __init__(self, url, source, politicians, current_news_titles):
@@ -22,7 +22,8 @@ class FeedCrawler(object):
                     news = News.objects.create(title=entry['title'],
                         pub_date=parser.parse(entry['published']),
                         link=entry['link'],
-                        source=self.source
+                        source=self.source,
+                        fonte=Fonte.objects.create()
                     )
                     for politician in polits:
                         politician.add_relevant_news(news)

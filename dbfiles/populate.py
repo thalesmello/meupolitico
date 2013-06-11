@@ -35,7 +35,7 @@ p = Politician(name='Dilma Rousseff', cargo="Presidente", cidade="Belo Horizonte
 p.save()
 ###################################################
 # Popular Governadores
-from elementtree import ElementTree as et
+"""from elementtree import ElementTree as et
 tree = et.parse('Governadores.xml')
 root = tree.getroot()
 for governador in root[1]:
@@ -48,7 +48,7 @@ for governador in root[1]:
 	p.save()
 # 	# p = Politician.objects.get(name=nome.text)
 # 	# p.foto_url = img
-# 	# p.save()
+# 	# p.save()"""
 ###################################################
 # # Popular Senadores
 from elementtree import ElementTree as et

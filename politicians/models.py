@@ -24,25 +24,6 @@ class Party(models.Model):
     def __unicode__(self):
         return self.acronym
 
-class Politician(models.Model):
-    name = models.CharField(max_length=100, default='')    
-    party = models.ForeignKey(Party)
-    foto_url = models.CharField(max_length=300, default='')
-    cargo = models.CharField(max_length=50, default='')
-    cidade = models.CharField(max_length=50, default='')
-    telefone = models.CharField(max_length=20, default='')
-    wikipedia = models.CharField(max_length=300, default='')
-    youtube = models.CharField(max_length=300, default='')
-    twitter = models.CharField(max_length=300, default='')
-    facebook = models.CharField(max_length=300, default='')
-    estrela1 = models.IntegerField(default=0)
-    estrela2 = models.IntegerField(default=0)
-    estrela3 = models.IntegerField(default=0)
-    estrela4 = models.IntegerField(default=0)
-    estrela5 = models.IntegerField(default=0)
-    def __unicode__(self):
-        return self.name
-
 class Fonte(models.Model):
     nome = models.CharField(max_length=50)
     site = models.CharField(max_length=150)
@@ -54,6 +35,7 @@ class Fonte(models.Model):
 
     def __unicode__(self):
         return self.nome
+
 
 class News(models.Model):
     title = models.CharField(max_length=200)
@@ -89,6 +71,34 @@ class News(models.Model):
 
     def get_all_politicians(self):
         return self.relevant_news.all()
+
+class Politician(models.Model):
+    name = models.CharField(max_length=100, default='')    
+    party = models.ForeignKey(Party)
+    relevant_news = models.ManyToManyField(News, blank=True, related_name="relevant_news")
+    foto_url = models.CharField(max_length=300, default='')
+    cargo = models.CharField(max_length=50, default='')
+    cidade = models.CharField(max_length=50, default='')
+    telefone = models.CharField(max_length=20, default='')
+    wikipedia = models.CharField(max_length=300, default='')
+    youtube = models.CharField(max_length=300, default='')
+    twitter = models.CharField(max_length=300, default='')
+    facebook = models.CharField(max_length=300, default='')
+    estrela1 = models.IntegerField(default=0)
+    estrela2 = models.IntegerField(default=0)
+    estrela3 = models.IntegerField(default=0)
+    estrela4 = models.IntegerField(default=0)
+    estrela5 = models.IntegerField(default=0)
+    def __unicode__(self):
+        return self.name
+    def get_relevant_news(self):
+        return self.relevant_news.all()
+    def is_relevant_news(self, news):
+        return news in self.get_relevant_news()
+    def add_relevant_news(self, news):
+        self.relevant_news.add(news)
+    def remove_relevant_news(self, news):
+        self.relevant_news.remove(news)
 
 
 class User(models.Model):
