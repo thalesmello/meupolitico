@@ -63,7 +63,7 @@
 
 {% if review_user %}
 <a href="{% url 'edit_review' review_user.id %}" id="EditarReview" data-message="mensagem" class="btn btn-primary">Editar Review</a>
-{% else %}
+{% elif request.session.username != none %}
 <a href="{% url 'politician_review' politician.id %}" id="CriarReview" data-message="mensagem" class="btn btn-primary">Criar  Review</a>
 {% endif %}
 
@@ -119,7 +119,7 @@
              - {{review.pub_date}}
          </span>
 
-        <a href=""> por {{ review.user.username }}</a>
+        <!-- <a href="">  -->por {{ review.user.username }}<!-- </a> -->
         </div>
 
             <p>{{ review.texto }}</p>
