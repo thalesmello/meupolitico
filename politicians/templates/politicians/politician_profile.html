@@ -87,7 +87,7 @@
     	    <div class="noticia">
         <h3 class="news_title"><a href="{{ news.link}}">{{ news.title }}</a> </h3>
         <p class="news_detail">
-        	 - {{news.pub_date}}
+        	{{news.source}} - {{news.pub_date}}
          </p>
          </div>
         {% if not forloop.last %}

@@ -12,6 +12,10 @@ def home(request):
 
 def politicians(request):
 	politicians_list = Politician.objects.all().order_by('name')
+	if request.method == 'POST':
+		cargo = request.POST['cargo']
+		estado = request.POST['estado']
+
 	context = {'politicians_list': politicians_list}
 	return render(request, 'politicians/politicians.html', context)
 
@@ -414,3 +418,9 @@ def news_page(request, news_id):
 
 def politica_comentario(request):
 	return render(request, 'politicians/politica_comentario.html')
+
+def sobre(request):
+	return render(request, 'politicians/sobre.html')
+
+def paginainexistente(request):
+	return render(request, 'politicians/home.html')

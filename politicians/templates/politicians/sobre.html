@@ -1,0 +1,18 @@
+{% extends "politicians/base.html" %}
+
+{% block content %}
+<h1 id="heading_text">Projeto MeuPolítico</h1>
+<div class="span12" style="text-align:center;">
+<h3> Projeto que fornece uma interface para que o usuário possa <br> se informar a respeito de seus representantes Políticos <br> através de Notícias e Reviews de outros usuários </h3>
+
+<h4 style="text-align:center;margin-top:20px;">Contato: <a href="mailto:meupolitico@googlegroups.com">meupolitico@googlegroups.com</a></h4></div>
+
+{% endblock %}
+
+{% block page_js %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#top_sobre').addClass('active');
+        });
+    </script>
+{% endblock %}
