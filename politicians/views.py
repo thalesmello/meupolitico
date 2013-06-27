@@ -53,6 +53,7 @@ def politician_profile(request, politician_id):
 				review_user = r
 
 	except KeyError, User.DoesNotExist:
+		is_favorited = False
 		pass
 	
 	context = {'politician': politician, 'recent_news': recent_news, 'is_favorited': is_favorited,
